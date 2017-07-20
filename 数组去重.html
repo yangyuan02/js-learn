@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组去重</title>
+</head>
+<body>
+	<script>
+		// Array.prototype.unique = function(){  method1
+		// 	var res = [this[0]]
+		// 	for(var i = 1;i<this.length;i++){
+		// 		var repeat = false
+		// 		for(var j = 0;j<res.length;j++){
+		// 			if(this[i]==res[j]){
+		// 				repeat = true
+		// 				break
+		// 			}
+		// 		}
+		// 		if(!repeat){
+		// 			res.push(this[i])
+		// 		}
+		// 	}
+		// 	return res
+		// }
+		// var arr = [1,1,2,3,2,4,5]
+		// console.log(arr.unique())
+
+		// Array.prototype.unique = function(){  method2
+		// 	this.sort()
+		// 	var res = [this[0]]
+		// 	for(var i = 1;i<this.length;i++){
+		// 		if(this[i]!==res[res.length-1]){
+		// 			res.push(this[i])
+		// 		}
+		// 	}
+		// 	return res
+		// }
+		// var arr = [1,1,2,3,2,4,5]
+		// console.log(arr.unique())
+		// Array.prototype.unique = function(){  //method3
+		// 	var res = []
+		// 	var json = {}
+		// 	for(var i = 0;i<this.length;i++){
+		// 		if(!json[this[i]]){
+		// 			res.push(this[i])
+		// 			json[this[i]] = 1
+		// 		}
+		// 	}
+		// 	return res
+		// }
+		// var arr = [1,1,2,3,2,4,5]
+		// console.log(arr.unique())
+		Array.prototype.unique = function(){
+			var n = []
+			for(var i = 0;i<this.length;i++){
+				if(n.indexOf(this[i])==-1){
+					n.push(this[i])
+				}
+			}
+			return n
+		}
+		var arr = [1,1,2,3,2,4,5]
+		console.log(arr.unique())
+	</script>
+</body>
+</html>
