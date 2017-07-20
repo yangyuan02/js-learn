@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var arr = [8,94,15,88,55,76,21,39]
+		// Array.prototype.sortArr = function(){ //method1
+		// 	for(var i =0 ;i<this.length-1;i++){
+		// 		for(var j = 0;j<this.length-1-i;j++){
+		// 			if(this[j]>this[j+1]){
+		// 				var temp = this[j]
+		// 				this[j] = this[j+1]
+		// 				this[j+1] = temp
+		// 			}
+		// 		}
+		// 	}
+		// 	return this
+		// }
+		// console.log(arr.sortArr())
+		var times=0;  
+		Array.prototype.sortArr = function(){ //method2
+			for(var i = 0;i<this.length-1;i++){
+				for(var j = i+1;j<this.length;j++){
+					if(this[i]>this[j]){
+						var temp = this[i]
+						this[i] = this[j]
+						this[j] =temp
+					}
+					console.log("第"+(++times)+"次排序后："+this);  
+				}
+			}
+			return this
+		}
+		console.log(arr.sortArr())
+	</script>
+</body>
+</html>
