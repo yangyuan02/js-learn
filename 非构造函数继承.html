@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>非构造函数继承</title>
+</head>
+<body>
+	<script>
+		var Chinese = {    
+			nation:'中国'
+		}
+		var Doctor = {
+			career:'医生'
+		}
+		// function object(o){ //method1
+		// 	function F(){}
+		// 	F.prototype = o
+		// 	return new F()
+		// }
+		// var Doctor = object(Chinese)
+		// Doctor.career = '医生'
+		// console.log(Doctor.nation)
+
+		// 浅拷贝
+		// function extendCody(p){ //子对象获得的只是一个内存地址会相互影响
+		// 	var c = {}
+		// 	for(var i in p){
+		// 		c[i] = p[i]
+		// 	}
+		// 	c.uber = p
+		// 	return c
+		// }
+		// Chinese.birthPlaces = ['北京','上海','香港']
+		// var Doctor = extendCody(Chinese)
+		// Doctor.career = '医生'
+		// Doctor.birthPlaces.push('厦门')
+		// console.log(Doctor.birthPlaces) //["北京", "上海", "香港", "厦门"]
+		// console.log(Chinese.birthPlaces) //["北京", "上海", "香港", "厦门"]
+
+		//深拷贝
+			function deepCopy(p, c) { 
+	　　　　var c = c || {}; 
+	　　　　for (var i in p) { 
+	　　　　　　if (typeof p[i] === 'object') { 
+	　　　　　　　　c[i] = (p[i].constructor === Array) ? [] : {}; 
+	　　　　　　　　deepCopy(p[i], c[i]); 
+	　　　　　　} else { 
+	　　　　　　　　　c[i] = p[i]; 
+	　　　　　　} 
+	　　　　} 
+	　　　　return c; 
+	　　} 
+		var Doctor = deepCopy(Chinese); 
+		Chinese.birthPlaces = ['北京','上海','香港']; 
+　　	Doctor.birthPlaces.push('厦门');
+		console.log(Doctor.birthPlaces) //["北京", "上海", "香港", "厦门"]
+		console.log(Chinese.birthPlaces) //["北京", "上海", "香港"]aaaaaa
+	</script>
+</body>
+</html>
