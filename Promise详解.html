@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// http://www.cnblogs.com/lvdabao/p/es6-promise-1.html
+
+		// var p = new Promise(function(resolve,reject){
+		// 	setTimeout(function(){
+		// 		console.log('执行完成')
+		// 		resolve('随便什么数据')
+		// 	},2000)
+		// })
+		// 运行代码，会在2秒后输出“执行完成”。注意！我只是new了一个对象，并没有调用它，我们传进去的函数就已经执行了，这是需要注意的一个细节。所以我们用Promise的时候一般是包在一个函数中，在需要的时候去运行这个函数，如：
+		// function runAsync(){
+		// 	var p = new Promise(function(resolve,reject){
+		// 		setTimeout(function(){
+		// 			console.log('执行完成')
+		// 			resolve('随便什么数据')
+		// 		},2000)
+		// 	})
+		// 	return p
+		// }
+		// runAsync()  //得到一个Promise对象
+		// then接收一个参数，是函数，并且会拿到我们在runAsync中调用resolve时传的的参数。运行这段代码，会在2秒后输出“执行完成”，紧接着输出“随便什么数据”
+		// runAsync().then(function(data){
+		// 	console.log(data)
+		// })
+		// 就是能把原来的回调写法分离出来，在异步操作执行完后，用链式调用的方式执行回调函数。
+
+		// 你可能会不屑一顾，那么牛逼轰轰的Promise就这点能耐？我把回调函数封装一下，给runAsync传进去不也一样吗，就像这样
+		// function runAsync(callback){
+		// 	setTimeout(function(){
+		// 		console.log('执行完成')
+		// 		callback('随便什么数据')
+		// 	},2000)
+		// }
+		// runAsync(function(data){
+		// 	console.log(data)
+		// })
+		// 链式操作的用法
+		// function runAsync1(){
+		// 	var p = new Promise(function(resolve,reject){
+		// 		setTimeout(function(){
+		// 			console.log('runAsync1')
+		// 			resolve('随便什么数据1')
+		// 		},2000)
+		// 	})
+		// 	return p
+		// }
+		// function runAsync2(){
+		// 	var p = new Promise(function(resolve,reject){
+		// 		setTimeout(function(){
+		// 			console.log('runAsync2')
+		// 			resolve('随便什么数据2')
+		// 		},2000)
+		// 	})
+		// 	return p
+		// }
+		// function runAsync3(){
+		// 	var p = new Promise(function(resolve,reject){
+		// 		setTimeout(function(){
+		// 			console.log('runAsync3')
+		// 			resolve('随便什么数据3')
+		// 		},2000)
+		// 	})
+		// 	return p
+		// }
+		// runAsync1()
+		// .then(function(data){
+		// 	console.log(data)
+		// 	return runAsync2()
+		// })
+		// .then(function(data){
+		// 	console.log(data)
+		// 	return runAsync3()
+		// })
+		// .then(function(data){
+		// 	console.log(data)
+		// })
+		// 在then方法中，你也可以直接return数据而不是Promise对象，在后面的then中就可以接收到数据了，比如我们把上面的代码修改成这样：
+		// runAsync1()
+		// .then(function(data){
+		// 	console.log(data)
+		// 	return runAsync2()
+		// })
+		// .then(function(data){
+		// 	console.log(data)
+		// 	return '直接返回数据'
+		// })
+		// .then(function(data){
+		// 	console.log(data)
+		// })
+		/********************************这是一条华丽的分割线*********************/
+		// reject的用法
+		// 到这里，你应该对“Promise是什么玩意”有了最基本的了解。那么我们接着来看看ES6的Promise还有哪些功能。我们光用了resolve，还没用reject呢，它是做什么的呢？事实上，我们前面的例子都是只有“执行成功”的回调，还没有“失败”的情况，reject的作用就是把Promise的状态置为rejected，这样我们在then中就能捕捉到，然后执行“失败”情况的回调。看下面的代码。
+		function getNumber(){
+			var p = new Promise(function(resolve,reject){
+				setTimeout(function(){
+					var num = Math.ceil(Math.random()*10)//生成1-10的随机数
+					if(num<=5){
+						resolve(num)
+					}else{
+						reject('数字太大了')
+					}
+				},2000)
+			})
+			return p
+		}
+		getNumber().then(function(data){
+			console.log('resolved')
+			console.log(data)
+		},function(error){
+			console.log('rejected')
+			console.log(error)
+		})
+		/********************************这是一条华丽的分割线*********************/
+		// all的用法
+// Promise的all方法提供了并行执行异步操作的能力，并且在所有异步操作执行完后才执行回调。我们仍旧使用上面定义好的runAsync1、runAsync2、runAsync3这三个函数，看下面的例子：
+// Promise
+// .all([runAsync1(), runAsync2(), runAsync3()])
+// .then(function(results){
+//     console.log(results);
+// });
+	</script>
+</body>
+</html>
