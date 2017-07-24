@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>高阶函数</title>
+</head>
+<body>
+	<script>
+		// 所谓高阶函数就是可以把函数作为参数，或者是将函数作为返回值的函数。
+		// 例如：将两个数的平方相加,这里匿名函数fn就是函数被作为参数。
+		// function add(a,b,fn){
+		// 	return fn(a)+fn(b)
+		// }
+		// var fn = function(a){
+		// 	return a*a
+		// }
+		// console.log(add(2,3,fn))
+		// map作用在数组的每个元素上的函数
+		// var arr = [1,2,3,4,5]
+		// var fn = function(a){
+		// 	return a+10
+		// }
+		// console.log(arr.map(fn))
+		// reduce也作用在数组上，但是每次只能接受两个参数
+		// var arr=["小","明","喜","欢","学","习"]
+		// var fn = function(a,b){
+		// 	return a+b
+		// }
+		// console.log(arr.reduce(fn))
+		// filter用于过滤数组的元素
+		var arr=[1,2,3,4,5,6,7,8,9,10]
+		var fn = arr.filter(function(x){
+			return x%2==0
+		})
+		console.log(fn)
+	</script>
+</body>
+</html>
