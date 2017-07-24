@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 变量的作用域
+		// 函数内部可以直接读取全局变量
+		// var n = 999
+		// function fn1(){
+		// 	console.log(n)
+		// }
+		// fn1()
+		// 函数外部自然无法读取函数内的局部变量
+		// function f1(){
+		// 	var n = 999
+		// }
+		// f1()
+		// console.log(n)//Uncaught ReferenceError: n is not defined
+		// 如何从外部读取局部变量
+		// function f1(){
+		// 	var n = 999
+		// 	function f2(){
+		// 		console.log(n)
+		// 	}
+		// 	f2()
+		// }
+		// f1()
+		// 函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1 就是不可见的。这就是Javascript语言特有的“链式作用域”结构（chain scope）
+
+		// 既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！
+		// function f1(){
+		// 	var n = 999
+		// 	function f2(){
+		// 		return n
+		// 	}
+		// 	return f2
+		// }
+		// var result = f1()
+		// console.log(result())
+		// 一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中
+
+		var name = 'The Window'
+		var object = {
+			name:'My object',
+			getNameFunc:function(){
+				//var that = this  // My object
+				return function(){
+					return this.name
+				}
+			}
+		}
+		console.log(object.getNameFunc()())//The Window
+	</script>
+</body>
+</html>
