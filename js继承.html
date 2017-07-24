@@ -38,14 +38,75 @@
 			// 来自原型对象的引用属性是所有实例共享的
 			// 创建子类实例时，无法向父类构造函数传参
 		/**********************************************************************/
+		// function Cat(name){
+		// 	Animal.call(this)
+		// 	this.name = name||'tom'
+		// }
+		// //test code
+		// var cat = new Cat()
+		// console.log(cat.name)//tom
+		// console.log(cat.sleep())//tom
+		// console.log(cat instanceof Animal)//true
+		// console.log(cat instanceof Cat) //true
+		/**********************************************************************/
+		// 实例继承
+		// function Cat(name){
+		// 	var instance = new Animal()
+		// 	instance.name = name||'tom'
+		// 	return instance
+		// }
+		// // test code
+		// var cat = new Cat()
+		// console.log(cat.name) //tom
+		// console.log(cat.sleep()) //tom
+		// console.log(cat instanceof Animal); // true
+		// console.log(cat instanceof Cat); // false
+		/**********************************************************************/
+		// 拷贝继承
+		// function Cat(name){
+		// 	var animal = new Animal()
+		// 	for(var p in animal){
+		// 		Cat.prototype[p] = animal[p]
+		// 	}
+		// 	Cat.prototype.name = name||'tom'
+		// }
+		// //test code
+		// var cat = new Cat()
+		// console.log(cat.name)//tom
+		// console.log(cat.sleep())//tom
+		// console.log(cat instanceof Animal); // false
+		// console.log(cat instanceof Cat); // true
+		/**********************************************************************/
+		// 组合继承
+		// function Cat(name){
+		// 	Animal.call(this)
+		// 	this.name = name||'tom'
+		// }
+		// Cat.prototype = new Animal
+		// //test code
+		// var cat = new Cat()
+		// console.log(cat.name)
+		// console.log(cat.sleep())
+		// console.log(cat instanceof Animal)
+		// console.log(cat instanceof Cat)
+		/**********************************************************************/
+		// 寄生组合继承
 		function Cat(name){
 			Animal.call(this)
-			this.name = name||'tom'
+			this.name = name ||'tom'
 		}
+		(function(){
+			var Super = function(){}
+			Super.prototype = Animal.prototype
+			Cat.prototype = new Super()
+		})()
 		//test code
-		var cat = new Cat()
-		console.log(cat.name)//tom
-		console.log(cat.sleep())//tom	
+		var cat = new Cat() 
+		var cat = new Cat();
+		console.log(cat.name);//tom
+		console.log(cat.sleep()); //tom
+		console.log(cat instanceof Animal); // true
+		console.log(cat instanceof Cat); //true
 	</script>
 </body>
 </html>
