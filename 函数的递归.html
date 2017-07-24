@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 求1-100的和
+		function sum(n){
+			if(n==1) return 1 //一定的加判断条件
+			return sum(n-1)+n
+		}
+		console.log(sum(100))
+	</script>
+</body>
+</html>
