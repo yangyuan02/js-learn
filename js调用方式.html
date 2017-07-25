@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 方法调用模式
+		// 函数调用模式
+		// 构造器调用模式
+		// apply调用模式
+		/***************************方法调用模式*************************/
+		var myObject = {
+			value:1111,
+			inc:function(){
+				// 请注意this此时指向myobject
+				console.log(this.value)
+			}
+		}
+		myObject.inc()
+		/***************************函数调用模式*************************/
+		var add = function(a,b){
+			console.log(this)  //请注意this此时指向window
+			return a+b
+		}
+		var sum = add(3,4)
+		/***************************构造器调用模式*************************/
+	</script>
+</body>
+</html>
