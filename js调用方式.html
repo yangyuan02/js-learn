@@ -15,17 +15,27 @@
 			value:1111,
 			inc:function(){
 				// 请注意this此时指向myobject
-				console.log(this.value)
+				// console.log(this.value)
 			}
 		}
 		myObject.inc()
 		/***************************函数调用模式*************************/
 		var add = function(a,b){
-			console.log(this)  //请注意this此时指向window
+			// console.log(this)  //请注意this此时指向window
 			return a+b
 		}
 		var sum = add(3,4)
-		/***************************构造器调用模式*************************/
+		/*******************************************************************/
+		function makeArray(arg1,arg2){
+			return [this,arg1,arg2]
+		}
+		console.log(makeArray('one','two')) //[Window, "one", "two"]
+		/*******************************************************************/
+		var arrayMake = {
+			value:1,
+			make:makeArray
+		}
+		console.log(arrayMake.make('one','two')) //[Object, "one", "two"] this指向arrayMake
 	</script>
 </body>
 </html>
