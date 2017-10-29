@@ -55,7 +55,7 @@ function bollSort(arr){ //冒泡排序
 var arr = [1,2,3,6,7,4,5]
 bollSort(arr)
 
-function findLatter(arr){
+function findLatter(arr){//找出那个字母出现次数最多
     var json  = {}
     for(var i = 0;i<arr.length;i++){
         json[arr[i]] = (json[arr[i]]+1)||1
