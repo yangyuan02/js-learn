@@ -76,6 +76,85 @@ function findLatter(arr){//找出那个字母出现次数最多
 var str = 'aaabcededaaaeegg'
 findLatter(str)
 
+function toQfw(n){//数字千分位   小数bug
+    var str_n = n.toString()
+    var result = ''
+    while(str_n.length>3){
+        result = ','+str_n.slice(-3)+result
+        str_n = str_n.slice(0,str_n.length-3)
+    }
+    return str_n+result
+}
+var number = '12345678'
+
+toQfw(number)
+
+
+var str="123598752"; //正则版
+var re=/(?=(?!(\b))(\d{3})+$)/g;
+str=str.replace(re,",");
+console.log(str)
+
+
+function toThousands (str) {  //小数位版
+
+    var number = arguments[1] || 0;
+
+    var str = str.toString();
+
+    var decimal = '';
+
+    var pos = str.indexOf('.');
+
+    var result = '';
+
+    var decimalPos = '0';
+
+    if (pos > -1) {
+
+        decimal =  str.slice(pos,pos + 1 + number);
+
+        str = str.slice(0,pos);
+
+    }
+
+    while( str.length > 3) {
+
+        result = ',' + str.slice(-3) + result;
+
+        str = str.slice(0,str.length-3);
+
+    }
+
+    if (str) {
+
+        result = str + result;
+
+        if(decimal && number) {
+
+            result += decimal
+
+        } else {
+
+            if (number){
+
+                decimalPos = '.' + decimalPos.repeat(number)
+
+                result += decimalPos
+
+            }
+
+        }
+
+    }
+
+    return result;
+
+}
+
+var number = '12345678.3434';
+
+toThousands(number,2)
 
 
 
