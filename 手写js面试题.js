@@ -158,6 +158,49 @@ toThousands(number,2)
 
 
 
+var arr = [1,1,33,22,44,3,4,5,4,22];
+
+
+function unique(arr){  //不用for do-while while写数组去重
+
+
+    var result = [];
+
+    var len = arr.length;
+
+
+    return (function(){
+
+      len--;
+     
+      if (len >= 0) {
+
+
+          if (result.indexOf(arr[len]) === -1) {
+
+             result.push(arr[len])
+
+          }
+
+
+        arguments.callee()
+
+
+      }
+
+      return result;
+
+
+    })()
+    
+
+
+}
+
+unique(arr);
+
+
+
 
 
 
