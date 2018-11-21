@@ -199,6 +199,52 @@ function unique(arr){  //不用for do-while while写数组去重
 
 unique(arr);
 
+//类数组转为真的数组
+
+Array.prototype.slice.call([类数组])
+
+Array.from([类数组])
+
+//数组降维度
+function flatten(arr){
+    let res = []
+    for(var i = 0;i<arr.length;i++){
+        if(Array.isArray(arr[i])){//递归降维度
+            res = res.concat(flatten(arr[i]))
+        }else{
+            res.push(arr[i])
+        }
+    }
+    return res;
+}
+
+function flatten(arr){//reduce
+    return arr.reduce(function(prev,item){
+        return prev.concat(Array.isArray(item)?flatten(item):item)
+    },[])
+}
+
+function flatten(arr){//扩展运算符
+    while(arr.some(item => Array.isArray(item))){
+        arr = [].concat(...arr)
+    }
+    return arr
+}
+//两种定时器实现轮询
+setInterval(function(){
+    $.get("/path/to/server",function(data){
+        console.log(data)
+    })
+})
+
+function poll(){
+    setTimeout(function(){
+        $.get("path/to/server",function(data){
+            poll()
+        })
+    })
+}
+poll()
 
 
 
