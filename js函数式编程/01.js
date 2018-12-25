@@ -141,3 +141,88 @@ const fortytwos = {
 
 function weirdAdd(n, f) {return n + f()};
 weirdAdd(42,function(){return 42})
+
+function iterateUntil(fun,check,init) {
+    var ret = [];
+    var result = fun(init);
+    while (check(result)) {
+        ret.push(result);
+        result = fun(result)
+    }
+    return ret;
+}
+iterateUntil(function(n) {
+    return n + n;
+},function(n){
+    return n <= 1024;
+},1)
+
+function always(VALUE) {
+    return function(){
+        return VALUE;
+    }
+};
+const f = always(function(){})
+const g = always(function(){})
+f() === f(); // true
+f() === g(); // false
+
+function uniqueString(len) {
+    return Math.random().toString(36).substr(2,len);
+}
+
+function uniqueString(prefix) {
+    return [prefix, new Date().getTime()].join("");
+}
+
+function makeUniqueStringFunction(start) {
+    var COUNTER = start;
+    return function(prefix) {
+        return [prefix, COUNTER].join("")
+    }
+};
+var uniqueString = makeUniqueStringFunction(0);
+undefined("dari");
+
+var omgenerator = (function(init){
+    var COUNTER = init;
+    return {
+        uniqueString:function(prefix){
+            return [prefix, COUNTER++].join("")
+        }
+    }
+})(0)
+
+function leftCurryDiv(n) {
+    return function(d) {
+        return n/d;
+    }
+}
+function rightCurryDiv(d) {
+    return function(n) {
+        return n/d
+    }
+}
+var divide10By = leftCurryDiv(10);
+divide10By(2); // 5;
+
+var divide10By = rightCurryDiv(10);
+divide10By(2) // 0.2
+
+function curry(fun) { //自动柯里化
+    return function(arg) {
+        return fun(arg);
+    }
+};
+
+function curry2(fun) {
+    return function(secondArg) {
+        return function(firstArg) {
+            return fun(firstArg,secondArg);
+        }
+    }
+};
+function div(n, d) {
+    return n/d;
+}
+var div10 = curry2(div)(10);
