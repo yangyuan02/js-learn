@@ -43,3 +43,24 @@ let divProxy = new Proxy(div, {
     }
   }
 });
+
+const target = {};
+const handler = {
+    get: function(target, key, receiver) {
+        return Reflect.get(target, key, receiver)
+    },
+    set: function(target, key, value, receiver) {
+        return Reflect.set(target, key, value, receiver)
+    }
+}
+
+const proxy = new Proxy(target, handler);  //
+console.log(proxy.name)
+proxy.name = '大漠';
+console.log(proxy.name)
+proxy.count++
+console.log(proxy.count)
+
+
+
+
