@@ -247,6 +247,29 @@ function poll(){
 poll()
 
 
+function compare(a, b) {
+    if (a < b) {
+        return -1;
+    } else if(a>b) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+function where (arr, num) {
+    arr.push(num);
+    arr.sort(compare);
+    for (var i = 0, len =arr.length;i<len;i++) {
+        if(arr[i] === num) {
+            return i
+        }
+    }
+}
+// 把一个数插入数组中，并找出插入的位置
+where([1,2,3,4], 1.5); // 1
+
+
 
 
 
