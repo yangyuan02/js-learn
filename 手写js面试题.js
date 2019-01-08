@@ -269,7 +269,33 @@ function where (arr, num) {
 // 把一个数插入数组中，并找出插入的位置
 where([1,2,3,4], 1.5); // 1
 
+const a = () => {a:1}
 
+// 找出数组中最大的数字
+Array.prototype.max = function() {
+    var max = this[0];
+    for (var i = 0; i<this.length;i++) {
+        if (this[i] > max) {
+            max = this[i]
+        }
+    }
+    return max;
+}
+var arr = [1,45,23,3,6,2,7,234,56];
+arr.max();
+
+Array.prototype.max = function() {
+    return this.reduce((prev,cure,index,array) => {
+        return prev > cure ? prev:cure
+    })
+}
+
+var arr = [1,2,3]
+arr.max();
+
+Array.max = function(array) {
+    return Math.max.apply(Math, array);
+}
 
 
 
