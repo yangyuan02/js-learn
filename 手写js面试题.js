@@ -297,6 +297,32 @@ Array.max = function(array) {
     return Math.max.apply(Math, array);
 }
 
+// 随机排序数组 有bug
+function randomSort(a, b) {
+    return Math.random() > 0.5 ? -1 : 1;
+}
+
+var arr = [1,2,3,4,5,6,7,8];
+arr.sort(randomSort);
+
+function randomSort(arr, newArr) {
+    if (arr.length == 1) {
+        newArr.push(arr[0]);
+        return newArr;
+    }
+    var random = Math.ceil(Math.random() * arr.length) -1;
+    newArr.push(arr[random]);
+    arr.splice(random, 1);
+    return randomSort(arr, newArr);
+}
+
+for (var i = 0; i < 10; i++) {
+    var arr = [1,2,3,4,5,6];
+    var newArr = [];
+    randomSort(arr, newArr);
+    console.log(newArr);
+}
+
 
 
 
