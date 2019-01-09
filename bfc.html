@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .box1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin-bottom: 10px;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: yellow;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- https://juejin.im/post/5909db2fda2f60005d2093db -->
+    <!-- <div class="box1"></div>
+    <div class="box2"></div>  此时margin的值是10px, 不上20px -->
+    <!-- ---------------- -->
+    
+
+    <div class="box1"></div>   
+    <div class="text">   .text{overflow:hidden}
+        <div class="box2"></div>  套一层div 
+    </div>
+</body>
+</html>
