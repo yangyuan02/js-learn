@@ -324,6 +324,21 @@ for (var i = 0; i < 10; i++) {
 }
 
 
+// 数组去空值
+
+Array.prototype.notempty = function () {
+    var arr = [];
+    this.map(function(val, index) {
+        if (val !== '' && val != undefined) {
+            arr.push(val)
+        }
+    })
+    return arr;
+}
+var a = [1,2,undefined,4,'',5,null,7,0,9];
+var b = a.notempty() // []1,2,3,5,7,0,9
+
+
 
 
 
