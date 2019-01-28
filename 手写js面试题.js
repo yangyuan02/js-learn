@@ -338,6 +338,38 @@ Array.prototype.notempty = function () {
 var a = [1,2,undefined,4,'',5,null,7,0,9];
 var b = a.notempty() // []1,2,3,5,7,0,9
 
+// 对象数组分组
+var a = [{age:20,name:'zhangsan'},{age:20,name:'lisi'},{age:21,name:'wanwu'},{age:22,name:'xiaoliu'}]
+var b = {}
+a.forEach(item => {
+    !b[item.age] ? (b[item.age] = [item]) : b[item.age].push(item)
+});
+var res = []
+var index = 0;
+for (var key in b) {
+    res[index] = {
+        id: key,
+        names: b[key]
+    }
+    index++
+}
+console.log(res)
+
+ [
+     {
+         id:"20",
+         names:['zhangsan','lisi']
+     },
+     {
+        id:"21",
+        names:['wanwu']
+     },
+     {
+        id:"22",
+        names:['xiaoliu']
+     }
+ ]   
+
 
 
 
