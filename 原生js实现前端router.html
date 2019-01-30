@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style type="text/css">
+      .router_box,
+      #router-view {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 0 20px;
+      }
+
+      .router_box > a {
+        padding: 0 10px;
+        color: #42b983;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="router_box">
+      <a href="/home" class="router">主页</a>
+      <a href="/news" class="router">新闻</a>
+      <a href="/team" class="router">团队</a>
+      <a href="/about" class="router">关于</a>
+    </div>
+    <div id="router-view"></div>
+    <script>
+        // https://juejin.im/post/5c5014ef51882525aa50a25b?utm_source=gold_browser_extension
+      function Vue(parameters) {
+        let vue = {};
+        vue.routes = parameters.routes || [];
+        vue.init = function(params) {
+          document.querySelectorAll(".router").forEach((item, index) => {
+            item.addEventListener(
+              "click",
+              function(e) {
+                let event = e || window.event;
+                event.preventDefault;
+                window.location.hash = this.getAttribute("href");
+              },
+              false
+            );
+          });
+          window.addEventListener("hashchange", () => {
+            vue.routerChange();
+          });
+          vue.routerChange();
+        };
+        vue.routerChange = () => {
+          let nowHash = window.location.hash;
+          let index = vue.routes.findIndex((item, index) => {
+            return nowHash == "#" + item.path;
+          });
+          if (index >= 0) {
+            document.querySelector("#router-view").innerHTML =
+              vue.routes[index].component;
+          } else {
+            let defaultIndex = vue.routes.findIndex((item, index) => {
+              return item.path == "*";
+            });
+            if (defaultIndex >= 0) {
+              window.location.hash = vue.routes[defaultIndex].redirect;
+            }
+          }
+        };
+        vue.init();
+      }
+      var router = new Vue({
+        routes: [
+          {
+            path: "/home",
+            component:
+              "<h1>主页</h1><a href='https://github.com/biaochenxuying'>https://github.com/biaochenxuying</a>"
+          },
+          {
+            path: "/news",
+            component:
+              "<h1>新闻</h1><a href='http://biaochenxuying.cn/main.html'>http://biaochenxuying.cn/main.html</a>"
+          },
+          {
+            path: "/team",
+            component: "<h1>团队</h1><h4>全栈修炼</h4>"
+          },
+          {
+            path: "/about",
+            component:
+              "<h1>关于</h1><h4>关注公众号：BiaoChenXuYing</h4><p>分享 WEB 全栈开发等相关的技术文章，热点资源，全栈程序员的成长之路。</p>"
+          },
+          {
+            path: "*",
+            redirect: "/home"
+          }
+        ]
+      });
+      function genKey() {
+        var t = "xxxxxxxx";
+        return t.replace(/[xy]/g, function(c) {
+          var r = (Math.random() * 16) | 0;
+          var v = c === "x" ? r : (r & 0x3) | 0x8;
+          return v.toString(16);
+        });
+      }
+      window.linkTo = function(path) {
+        if (path.indexOf("?") !== "-1") {
+          window.location.hash = path + "&key=" + genKey();
+        } else {
+          window.location.hash = path + "&key=" + genKey();
+        }
+      };
+      function Router() {
+        this.routes = {};
+        this.beforeFun = null;
+        this.afterFUn = null;
+        this.routerViewId = "#routerView";
+        this.redirectRoute = null;
+        this.stackPages = true;
+        this.routerMap = [];
+        this.historyFlag = "";
+        this.history = [];
+        this.animationName = "slide";
+      }
+      Router.prototype = {
+        init(config) {
+          var self = this;
+          this.routerMap = config ? config.routes : this.routerMap;
+          this.routerViewId = config ? config.routerViewId : this.routerViewId;
+          this.stackPages = config ? config.stackPages : this.stackPages;
+          var name = document
+            .querySelector("routerView")
+            .getAttribute("data-animationName");
+          if (name) {
+            this.animationName = name;
+          }
+          this.animationName = config
+            ? config.animationName
+            : this.animationName;
+          if (!this.routerMap.length) {
+            var selector = this.routerViewId + ".page";
+            var pages = document.querySelectorAll("selector");
+            for (var i = 0; i < pages.length; i++) {
+              var page = pages[i];
+              var hash = page.getAttribute("data-hash");
+              var name = hash.substr(1);
+              var item = {
+                path: hash,
+                name: name,
+                callback: util.closure(name)
+              };
+              this.routerMap.push(item);
+            }
+          }
+          this.map();
+          window.linkTo = function(path) {
+            if (path.indexOf("?") !== "-1") {
+              window.location.hash = path + "&key=" + genKey();
+            } else {
+              window.location.hash = path + "&key=" + genKey();
+            }
+          };
+          window.addEventListener('load', function (event) {
+            self.historyChange(event);
+          },false)
+          window.addEventListener('hashchange', function () {
+              self.historyChange(event)
+          },false)
+        },
+        historyChange(event) {
+            var currentHash = util.getParamsUrl();
+            var nameStr = `router-${this.routerViewId}-history`;
+            this.history = window.sessionStorage[nameStr] ? JSON.parse(window.sessionStorage[nameStr]) : [];
+            var back = false,refresh = false,forward = false,index = 0,len = this.history.length;
+            for (var i = 0; i < len;i++) {
+                var h = this.history[i];
+                if (h.hash === currentHash.path && h.key === currentHash.hash.query.key) {
+                    index = i;
+                    if (i === len -1) {
+                        refresh = true
+                    } else {
+                        back = true
+                    }
+                } else {
+                    forward = true
+                }
+            }
+            if (back) {
+                this.historyFlag = 'back';
+                this.history.length = index +1;
+            } else if(refresh){
+                this.historyFlag = 'refresh'
+            } else {
+                this.historyFlag = 'forward'
+                var item = {
+                    key:currentHash.query.key,
+                    hash:currentHash.path,
+                    query:currentHash.query
+                }
+                this.history.push(item)
+            }
+            if (!this.stackPages) {
+                this.historyFlag = 'forward'
+            }
+            window.sessionStorage[nameStr] = JSON.stringify(this.history);
+            this.urlChange();
+        },
+        changView(currentHash){
+            var pages = document.getElementsByClassName("page");
+            var previousPage = document.getElementsByClassName("current")[0];
+            var currentPage = null;
+            var currHash = null;
+            for (var i = 0; i<pages.length;i++) {
+                var page = pages[i];
+                var hash = page.getAttribute("data-hash");
+                page.setAttribute("class","page");
+                if (hash === currentHash.path) {
+                    currHash = hash;
+                    currHash = page;
+                }
+            }
+            var enterName = 'enter-' + this.animationName;
+            var leaveName = 'leave-' + this.animationName;
+            if (this.historyFlag === 'back') {
+                if (previousPage) {
+                    util.addClass(currentPage, 'current');
+                }
+                setTimeout(() => {
+                    if(previousPage) {
+                        util.removeClass(previousPage,leaveName);
+                    }
+                }, 250);
+            } else if(this.historyFlag === 'forward'|| this.historyFlag === 'refresh') {
+                if (previousPage) {
+                    util.addClass(previousPage, 'current');
+                }
+                util.addClass(currentPage,enterName);
+                setTimeout(() => {
+                    if (previousPage) {
+                        util.removeClass(currentPage,enterName)
+                        util.addClass(currentPage,'current');
+                    }
+                }, 350);
+                currentPage.scrollTop = 0;
+                this.routes[currHash].callback ? this.routes[currHash].callback(currentHash) :null;
+            }
+            this.afterFUn ? this.afterFUn(currHash) : null;
+        },
+        urlChange() {
+            var currentHash = util.getParamsUrl();
+            if (this.routes[currentHash.path]) {
+                var self = this;
+                if (this.beforeFun) {
+                    this.beforeFun({to:{path:currentHash.path,query:currentHash.query},next:function(){
+                        self.changView(currentHash)
+                    }})
+                } else {
+                    this.changView(currentHash);
+                }
+            } else {
+                location.hash = this.redirectRoute;
+            }
+        },
+        map() {
+            for(var i = 0; i < this.routerMap.length;i++) {
+                var router = this.routerMap[i];
+                if (router.name === 'redirect') {
+                    this.redirectRoute = router.path
+                } else {
+                    this.redirectRoute = this.routerMap[0].path;
+                }
+                var newPath = route.path;
+                var path = newPath.replace(/\s*/g, '');
+                this.routes = {
+                    callback:route.callback,
+                }
+            }
+        },
+        beforeEach(callback) {
+            if (Object.prototype.toString.call(callback) === '[object Function]') {
+                this.beforEach = callback;
+            } else {
+
+            }
+
+        },
+        afterEach(callback){
+            if (Object.prototype.toString.call(callback) === '[object Function]') {
+                this.afterEach = callback;
+            }
+        }
+      };
+    </script>
+  </body>
+</html>
