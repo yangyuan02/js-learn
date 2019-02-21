@@ -210,14 +210,14 @@ setInterval(function() {
   $.get("/path/to/server", function(data) {
     console.log(data);
   });
-});
+},10*1000);
 
 function poll() {
   setTimeout(function() {
     $.get("path/to/server", function(data) {
       poll();
     });
-  });
+  },10*1000);
 }
 poll();
 

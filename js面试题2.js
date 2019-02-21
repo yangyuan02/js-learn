@@ -150,3 +150,10 @@ var b = 0 && 7;
 var c = 7 && 9;
 
 
+function A(r) {
+  var q=w=e=r;
+}
+A(1)
+console.log(q) //出错 函数作用域
+console.log(w) //1 因为没有声明自动全局量Î
+console.log(e) //1 因为没有声明自动全局量Î
