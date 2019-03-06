@@ -74,3 +74,16 @@ Function.prototype.testBind = function(that) {
   bound.prototype = new fNOP();
   return bound;
 };
+
+
+
+// 模拟new操作符
+
+
+function objectFactory() {
+  var obj = Object.create(null),
+  Constructor = [].shift.call(arguments),
+  obj._proto_ = Constructor.prototype,
+  var ret = Constructor.apply(obj,arguments)
+  return typeof ret === 'object' ? ret: obj;
+}
