@@ -87,3 +87,15 @@ function objectFactory() {
   var ret = Constructor.apply(obj,arguments)
   return typeof ret === 'object' ? ret: obj;
 }
+
+// 实现call方法
+const selfCall = function(context, ...args) {
+  let func = this;
+  context || (context = window);
+  if (typeof func !== 'function') throw new TypeError('this is not function')
+  let caller = Symbol('caller')
+  context[caller] = func
+  let res = context[caller](...args);
+  delete context[caller]
+  return res;
+}
