@@ -26,9 +26,20 @@ function uniqArrObj(arr) {
 var arr = [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 1 }];
 uniqArrObj(arr);
 
+function process(arr) {
+  const cache = [];
+  for (const t of arr) {
+    if (cache.find(c => c.value === t.value)) {
+      continue;
+    }
+    cache.push(t);
+  }
+  return cache;
+}
+
 function uniqStr(arr) {
   //字符串去重
-  var str = "";
+  var str = '';
   for (var i = 0; i < arr.length; i++) {
     if (str.indexOf(arr[i]) == -1) {
       str += arr[i];
@@ -36,7 +47,7 @@ function uniqStr(arr) {
   }
   return str;
 }
-var str = "abcdefaaa";
+var str = 'abcdefaaa';
 uniqStr(str);
 
 function bollSort(arr) {
@@ -75,26 +86,26 @@ function findLatter(arr) {
     latter
   };
 }
-var str = "aaabcededaaaeegg";
+var str = 'aaabcededaaaeegg';
 findLatter(str);
 
 function toQfw(n) {
   //数字千分位   小数bug
   var str_n = n.toString();
-  var result = "";
+  var result = '';
   while (str_n.length > 3) {
-    result = "," + str_n.slice(-3) + result;
+    result = ',' + str_n.slice(-3) + result;
     str_n = str_n.slice(0, str_n.length - 3);
   }
   return str_n + result;
 }
-var number = "12345678";
+var number = '12345678';
 
 toQfw(number);
 
-var str = "123598752"; //正则版
+var str = '123598752'; //正则版
 var re = /(?=(?!(\b))(\d{3})+$)/g;
-str = str.replace(re, ",");
+str = str.replace(re, ',');
 console.log(str);
 
 function toThousands(str) {
@@ -104,13 +115,13 @@ function toThousands(str) {
 
   var str = str.toString();
 
-  var decimal = "";
+  var decimal = '';
 
-  var pos = str.indexOf(".");
+  var pos = str.indexOf('.');
 
-  var result = "";
+  var result = '';
 
-  var decimalPos = "0";
+  var decimalPos = '0';
 
   if (pos > -1) {
     decimal = str.slice(pos, pos + 1 + number);
@@ -119,7 +130,7 @@ function toThousands(str) {
   }
 
   while (str.length > 3) {
-    result = "," + str.slice(-3) + result;
+    result = ',' + str.slice(-3) + result;
 
     str = str.slice(0, str.length - 3);
   }
@@ -131,7 +142,7 @@ function toThousands(str) {
       result += decimal;
     } else {
       if (number) {
-        decimalPos = "." + decimalPos.repeat(number);
+        decimalPos = '.' + decimalPos.repeat(number);
 
         result += decimalPos;
       }
@@ -141,7 +152,7 @@ function toThousands(str) {
   return result;
 }
 
-var number = "12345678.3434";
+var number = '12345678.3434';
 
 toThousands(number, 2);
 
@@ -207,17 +218,17 @@ function flatten(arr) {
 }
 //两种定时器实现轮询
 setInterval(function() {
-  $.get("/path/to/server", function(data) {
+  $.get('/path/to/server', function(data) {
     console.log(data);
   });
-},10*1000);
+}, 10 * 1000);
 
 function poll() {
   setTimeout(function() {
-    $.get("path/to/server", function(data) {
+    $.get('path/to/server', function(data) {
       poll();
     });
-  },10*1000);
+  }, 10 * 1000);
 }
 poll();
 
@@ -304,22 +315,17 @@ for (var i = 0; i < 10; i++) {
 Array.prototype.notempty = function() {
   var arr = [];
   this.map(function(val, index) {
-    if (val !== "" && val != undefined) {
+    if (val !== '' && val != undefined) {
       arr.push(val);
     }
   });
   return arr;
 };
-var a = [1, 2, undefined, 4, "", 5, null, 7, 0, 9];
+var a = [1, 2, undefined, 4, '', 5, null, 7, 0, 9];
 var b = a.notempty(); // []1,2,3,5,7,0,9
 
 // 对象数组分组
-var a = [
-  { age: 20, name: "zhangsan" },
-  { age: 20, name: "lisi" },
-  { age: 21, name: "wanwu" },
-  { age: 22, name: "xiaoliu" }
-];
+var a = [{ age: 20, name: 'zhangsan' }, { age: 20, name: 'lisi' }, { age: 21, name: 'wanwu' }, { age: 22, name: 'xiaoliu' }];
 var b = {};
 a.forEach(item => {
   !b[item.age] ? (b[item.age] = [item]) : b[item.age].push(item);
@@ -335,39 +341,39 @@ for (var key in b) {
 }
 console.log(res)[
   ({
-    id: "20",
-    names: ["zhangsan", "lisi"]
+    id: '20',
+    names: ['zhangsan', 'lisi']
   },
   {
-    id: "21",
-    names: ["wanwu"]
+    id: '21',
+    names: ['wanwu']
   },
   {
-    id: "22",
-    names: ["xiaoliu"]
+    id: '22',
+    names: ['xiaoliu']
   })
 ];
 
 var old = [
   {
     id: 1,
-    name: "css",
-    type: "html"
+    name: 'css',
+    type: 'html'
   },
   {
     id: 2,
-    name: "css",
-    type: "html"
+    name: 'css',
+    type: 'html'
   },
   {
     id: 3,
-    name: "javacript",
-    type: "code"
+    name: 'javacript',
+    type: 'code'
   },
   {
     id: 4,
-    name: "javacript",
-    type: "code"
+    name: 'javacript',
+    type: 'code'
   }
 ];
 
@@ -390,4 +396,4 @@ var getNew = old =>
 
     return acc;
   }, []);
-  getNew(old)
+getNew(old);
