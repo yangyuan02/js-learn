@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2019-08-29 15:05:40
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2019-08-30 15:31:36
+ * @LastEditTime: 2019-09-02 11:30:13
  */
 // https://juejin.im/post/5cd7f2c4e51d453a7d63b715
 'ues strict'
@@ -390,3 +390,19 @@ handlerChange = (event:ChangeEvent<HTMLInputElement>) => {
     const {name,value}:{name:string,value:string} = event.target;  // 为event对象中的name和value指定类型
     const {name,value}:any = event.target;
 }
+
+// *****
+interface Options {color:string,volume:number}
+
+let options = {} as Options;
+
+options.color = 'red';
+options.volume = 111;
+
+
+//******** */ declare的使用
+
+declare function require(path:string):any;
+
+declare function define(...args:any[]):any
+
