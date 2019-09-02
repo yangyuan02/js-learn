@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2019-09-02 14:59:14
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2019-09-02 15:00:23
+ * @LastEditTime: 2019-09-02 15:18:39
  * @Description:
  */
 import { createStore, combineReducers, applyMiddleware } from 'redux';
