@@ -1,7 +1,14 @@
+/*
+ * @Author: yangyuan
+ * @Date: 2019-06-03 14:52:23
+ * @Email: 1367511704@qq.com
+ * @LastEditTime: 2019-09-17 13:52:43
+ * @Description:
+ */
 // 发布订阅
 class EventEmitter {
   constructor() {
-    this._event = Object.create(null);
+    this._events = Object.create(null);
   }
   on(type, handler) {
     (this._events[type] || (this._events[type] = [])).push(handler);
@@ -13,11 +20,14 @@ class EventEmitter {
   }
   once(type, handler) {
     let fired = false;
-    this.off(type, magic);
-    if (!fired) {
-      fired = true;
-      handler.apply(this, arguments);
+    function magic() {
+      this.off(type, magic);
+      if (!fired) {
+        fired = true;
+        handler.apply(this, arguments);
+      }
     }
+
     this.on(type, magic);
   }
   emit(type) {
