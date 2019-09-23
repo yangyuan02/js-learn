@@ -1,0 +1,97 @@
+// 定义变量
+$blue: #1875e7;
+
+// 变量嵌在字符串中，需要写#{}
+
+$side :left;
+
+.rounded {
+    border-#{$side}-radius: 5px
+}
+
+// 继承
+.class1 {
+    border: 1px solid #ddd;
+}
+
+.class2 {
+    @extend .class1 font-size:120%
+}
+
+// 定义代码块
+@mixin left {
+    float: left;
+    margin-left: 10px;
+}
+
+div {
+    // 调用
+    @include left;
+}
+
+@mixin left($value:10px) {
+    // 缺省值
+    float: left;
+    margin-left: $value
+}
+
+div {
+    @include left(20px); // 调用
+}
+
+//自定义函数
+
+@function double($n) {
+    @return $n * 2;
+}
+
+#sidebar {
+    width: double(5px);
+}
+
+// URLs变量
+@imagesPath: '../images'
+
+    .arrow-select {
+    background: url('@{imagePath}/down_crrow.png')
+}
+
+//属性名变量
+
+@bb border-bottom;
+
+.search-icon {
+    @{bb}: 1px solid red;
+}
+
+// 嵌套变量
+@louzhedong: 'my name is louzhedong';
+@var 'louzhedong';
+
+content:@@var .box-shadow(@x: 0, @y: 0, @blue: 1px, @color: #000) {
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+.big-block {
+    .box-shadow(2px, 5px);
+}
+
+// when使用
+.test(@a) when (@a > 10) {
+    font-size: 18px;
+}
+
+.test(@a) when (@a <=10) {
+    font-size: 12px;
+}
+
+.test(@a) {
+    color: red;
+}
+
+// 调用
+.study {
+    .test(5);
+}
