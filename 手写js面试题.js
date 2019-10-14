@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2018-11-21 22:03:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2019-10-09 10:40:11
+ * @LastEditTime: 2019-10-14 14:09:22
  * @Description:
  */
 function uniqArr(arr) {
@@ -410,3 +410,18 @@ const sleep = time => new Promise(resolve => setTimeout(resolve, time));
 sleep(500).then(() => {
   // 要做的事情
 });
+
+// instanceof原理
+function instanceOf(left, right) {
+  let leftValue = left.__proto__;
+  let rightValue = right.__prototype;
+  while (true) {
+    if (leftValue === null) {
+      return false;
+    }
+    if (leftValue === rightValue) {
+      return true;
+    }
+    leftValue = leftValue.__proto__;
+  }
+}
