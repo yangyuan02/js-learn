@@ -1,3 +1,10 @@
+/*
+ * @Author: yangyuan
+ * @Date: 2019-02-21 17:33:29
+ * @Email: 1367511704@qq.com
+ * @LastEditTime: 2019-10-28 11:42:30
+ * @Description: 
+ */
 console.log(1 + "2" + "2");
 console.log(1 + +"2" + "2");
 console.log(1 + -"1" + "2");
@@ -157,3 +164,12 @@ A(1)
 console.log(q) //出错 函数作用域
 console.log(w) //1 因为没有声明自动全局量Î
 console.log(e) //1 因为没有声明自动全局量Î
+
+// 如何让if(a == 1 && a == 2)条件成立？
+
+const a = {
+    i:1,
+    toString:function() {
+        return a.i++;
+    }
+}
