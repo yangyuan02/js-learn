@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2019-02-21 17:33:29
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2019-10-28 11:42:30
+ * @LastEditTime: 2019-12-03 10:14:41
  * @Description: 
  */
 console.log(1 + "2" + "2");
@@ -173,3 +173,11 @@ const a = {
         return a.i++;
     }
 }
+
+
+const a = {
+    name:'1'
+}
+const b = a;
+a = null;
+b.name // 1 堆内存不会自动释放  盏内存会自动释放
