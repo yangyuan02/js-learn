@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2018-11-21 22:03:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2019-10-14 14:14:52
+ * @LastEditTime : 2019-12-20 13:35:16
  * @Description:
  */
 function uniqArr(arr) {
@@ -95,6 +95,13 @@ function findLatter(arr) {
 }
 var str = 'aaabcededaaaeegg';
 findLatter(str);
+
+// 方法二统计字符串出现次数最多的
+var str = 'aaabbbeecefde';
+str.split('').reduce((res, cur) => {
+  res[cur] ? res[cur]++ : (res[cur] = 1);
+  return res;
+}, {});
 
 function toQfw(n) {
   //数字千分位   小数bug
@@ -332,7 +339,12 @@ var a = [1, 2, undefined, 4, '', 5, null, 7, 0, 9];
 var b = a.notempty(); // []1,2,3,5,7,0,9
 
 // 对象数组分组
-var a = [{ age: 20, name: 'zhangsan' }, { age: 20, name: 'lisi' }, { age: 21, name: 'wanwu' }, { age: 22, name: 'xiaoliu' }];
+var a = [
+  { age: 20, name: 'zhangsan' },
+  { age: 20, name: 'lisi' },
+  { age: 21, name: 'wanwu' },
+  { age: 22, name: 'xiaoliu' }
+];
 var b = {};
 a.forEach(item => {
   !b[item.age] ? (b[item.age] = [item]) : b[item.age].push(item);
