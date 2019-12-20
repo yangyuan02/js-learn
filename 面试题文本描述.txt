@@ -1,0 +1,49 @@
+/*************************************************************************************************/
+1.new 操作符具体做了什么？
+var Fn = function() {}
+var fnObj = new Fn();
+
+1创建一个空对象
+var obj = new Object();
+2设置原型链
+obj._proto_ = Fn.prototype;
+3让Fn的this指向obj,并执行Fn的函数体
+var result = fn.call(obj)
+4判断Fn的返回值类型,如果是值类型,返回obj,如果是引用类型,就返回这个引用类型的对象
+if(typeof result === 'object) {
+    fnObj = result;
+} else {
+    fnObj = obj;
+}
+
+/*************************************************************************************************/
+2.原型链,原型,构造函数之间的关系总结
+Function Person {}
+const p1=new Person()
+p1.prototype是undefined
+实例p1上面是没有prototype而是通过__proto__访问到Person.prototype
+
+p1.construct=Person
+p1.__proto__=Person.prototype
+Person.prototype.__proto__=Object.prototype
+Object.prototype.__proto__=null
+
+一切底层对象上的原型的原型链等于对象的原型
+Function.prototype__proto__=Object.prototype
+Array.prototype__proto__=Object.prototype
+
+一切底层对象原型链等于函数的原型
+Object.__proto__=Function.prototype
+Array.__proto__=Function.prototype
+
+一切底层对象上的构造函数等于构造器函数，
+对象上构造器来自Function
+Array.construct=Function
+String.construct=Function
+Object.construct=Function
+cons arr=[1,2]
+art.construct = Array
+
+一切对象上原型的构造函数等于自己本身
+Array.prototype.construct=Array
+Object.prototype.construct=Object
