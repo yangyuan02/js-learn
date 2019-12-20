@@ -437,3 +437,13 @@ function instanceOf(left, right) {
     leftValue = leftValue.__proto__;
   }
 }
+
+// 将一个字符串重复n次
+function repeatStringNumTimes(string, times) {
+  let str = '';
+  while (times > 0) {
+    str += string;
+    times--;
+  }
+  return str;
+}
