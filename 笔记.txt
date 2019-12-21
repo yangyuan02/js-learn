@@ -149,3 +149,33 @@ TCP-三次握手和四次挥手简单理解
         Server:我已经全部听到了,但是等等我,我还没有说完
         Server:好了,我已经说完了
         Client:好的,那我们的通信结束
+
+/*************************************************************************************************/
+事件的各个阶段
+    捕获阶段-->目标阶段-->冒泡阶段
+    document-->target-->document
+    addEventList第三个参数设置true和false的区别已经非常清晰了
+    true表示该元素在事件的捕获阶段(由外往内传递)响应事件
+    false表示该元素在事件的冒泡阶段(由内向外传递)响应事件
+
+/*************************************************************************************************/
+web性能优化
+    1压缩html/css/js使用Brotli比Gzip压缩效果更好,更快 chrome下 response header content-encoding:br
+    2内嵌js一定要放在link css加载的前面,防止js阻塞css
+    3使用框架代码和polyfill文件可以直接引用script标签不必打包到webpack中,利用缓存
+    4使用静态域名js/css/img突破同域并发限制请求,并可以请求资源没带cookie请求
+    5自定义ui,少用第三方ui库
+    6使用阿里nginx模块nginx-http-concat做到多个文件合并一次请求
+    7图片使用webp和图片可以根据尺寸返回
+    8使用serviceWorker离线缓存
+    9使用css:-webkit-touch-action:manipulation;touch-action:manipulation来解决300ms延迟代替fastClick.js
+    10使用料加载技术优化图片加载
+    11使用https和http2.0加载网页,使用tcp多路复用,网页更加安全
+    12可以使用nodejs输出接口数据,前端直接拿到window上的变量数据,做出了避免客户端白屏问题 window._nuxt_ = <%-JSON.stringify(data)%>
+    13preload/prefatch/dns-prefetch预加载/下个页面加载/dns与解析
+    14async/defer延迟加载或异步加载
+    15避免浏览器dom引起大量的重排和回流
+    16服务端配置Cache-control max-age = 2592000
+    17利用LocalStorage缓存接口数据,根据时间半小时/1天,减少服务器请求,定时清理
+    
+/*************************************************************************************************/
