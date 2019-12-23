@@ -196,9 +196,9 @@ https工作原理
         组件销毁前执行,清除定时器
     destroyed
         组件销毁,还是可以使用data数据和methods里的方法
-        
+
 /*************************************************************************************************/
-10computed、watch、methods的区别
+10.computed、watch、methods的区别
 https://www.cnblogs.com/widgetbox/p/8954162.html
     computed
         当页面中有某些数据依赖其他数据进行变动的时候,可以使用计算属性,需要注意的是,就算在data中没有声明出要计算的变量,也可以写入
@@ -231,4 +231,45 @@ https://www.cnblogs.com/widgetbox/p/8954162.html
 总结:在computed和watch方面,一个是计算,一个是观察,在语义上是有区别的,计算是通过变量计算来得出数据,而观察是一个特定的值
 
 /*************************************************************************************************/
-    
+11.vue中data必须是一个函数
+    对象为引用类似时,当重用组件时,由于数据对象都指向同一个data对象,当在一个组件中修改data时,其他重用组件的data会同时修改,而使用返回对象的函数
+    由于每次都是一个新对象,引用地址不同,则不会出现这样的问题
+
+/*************************************************************************************************/
+12.vue组件通信
+    父组件与子组件
+        父组件传给子组件:子组件通过props方法接受数据
+        子组件传给父组件:$emit方法传递参数
+    非父组件,兄弟组件传值
+        eventBus,创建一个事件中心,相当于中转站,可以用来传递事件和接受事件,也可以使用vuex
+
+/*************************************************************************************************/
+13.$nextTick是什么
+    <div id="app">
+        <div v-if="showTest" id="text">
+            想要知道这段文字写的是什么
+        </div>
+        <button @lick="clickMe">点我试试看就能知道那段隐藏的文字写的是什么了</button>
+    </div>
+    ...
+    data:{
+        return {
+            showTest:false
+        }
+    },
+    methods:{
+        clickMe() {
+            this.showTest = true;
+            var text = document.getElementById("text").innerHTML;
+            alert(text) //  Uncaught TypeError: Cannot read property ‘innerHTML‘ of null
+            //////
+            改写
+            this.$nextTick(() => {
+                var text = document.getElementById("text").innerHTML;
+                alert(text) // 这个时候可以
+            })
+        }
+    }
+
+/*************************************************************************************************/
+14.vue中的ref是什么？
