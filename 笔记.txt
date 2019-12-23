@@ -287,6 +287,28 @@ https://www.cnblogs.com/loveyt/p/9946450.html
     默认插槽
     具名插槽
         插槽的默认内容
+        编译作用域
+        作用域插槽
 
 /*************************************************************************************************/
 16.vue双向绑定的原理
+    vue是通过Object.defineProperty()来实现数据劫持
+    实现方法:观察者模式Observer监听data的变化,当data有数据变化的时候通知观察者列表Dep(里面有与data变化对应的update函数)
+            watcher负责向观察者列表里添加(订阅)对应的更新函数,Dep里的更新函数执行完成了之后将最新的值更新到view上
+
+    <input type="text" id="in">
+    输入值为:<span id="out"></span>
+    const int = document.getElementById('in')
+    const out = document.getElementById('out')
+    var obj = {};
+    Object.defineProperty(obj, 'msg', {
+        enumerable: true,
+        configurable:true,
+        set(newVal) {
+            out.innerHTML = newVal;
+        }
+    })
+    int.addEventListener('input', function(e) {
+        obj.msg = e.target.value;
+    })
+
