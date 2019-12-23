@@ -196,3 +196,39 @@ https工作原理
         组件销毁前执行,清除定时器
     destroyed
         组件销毁,还是可以使用data数据和methods里的方法
+        
+/*************************************************************************************************/
+10computed、watch、methods的区别
+https://www.cnblogs.com/widgetbox/p/8954162.html
+    computed
+        当页面中有某些数据依赖其他数据进行变动的时候,可以使用计算属性,需要注意的是,就算在data中没有声明出要计算的变量,也可以写入
+        计算属性默认只有getter,可以在需要的时候设置setter
+            computed:{
+                fullName:{
+                    get:function() {
+                        return this.firstName + this.lastName
+                    },
+                    set:function() {
+                        // ...
+                    }
+                }
+            }
+    watch
+        watch和computed很相似,watch用于观察和监听页面上的vue实例,当然大部分我们都会使用computed,数据开变化同时
+        进行异步或者开销比较大,选择watch,watch为一个对象,键是需要观察的表达式,值是对应的回调函数,值也可以是方法名,
+        如果data中没有相应的属性,是不能watch,这点和computed不一样
+            watch: {
+                firstName: function(val) {
+                    this.function = val + '' + this.lastName
+                },
+                lastName:function(val) {
+                    this.function = this.firstName + '' + val
+                }
+            }
+    methods
+        方法,只要调用就好重新执行一次,相应的有一些触发条件,在某些时候methods和computed看不出茶杯,运算量比较大就会体现出来
+        computed是具有缓存的,只要计算属性依赖没有相应的进行数据更新,那么computed是直接从缓存中获取值的
+总结:在computed和watch方面,一个是计算,一个是观察,在语义上是有区别的,计算是通过变量计算来得出数据,而观察是一个特定的值
+
+/*************************************************************************************************/
+    
