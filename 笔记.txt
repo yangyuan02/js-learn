@@ -566,13 +566,33 @@
 
 /*************************************************************************************************/
 46.diff算法
+    diff算法的作用是用来计算出Virtual DOM中被改变的部分,然后针对该部分进行原生DOM操作,而不用重新渲染整个页面
+    diff算法有三大策略
+        1.Tree Diff
+        2.Component Diff
+        3.Element Diff
+    三种策略的执行顺序也是顺序依次执行
+        Tree Diff是对树每一层进行遍历,找出不同  
+        Component Diff是数据层面的差异比较
+            1.如果都是同一类型的组件(即:两节点是同一个组件类的两个不同实例,比如<div id="before"></div>与<div id="after"></div>)
+            按着原策略继续比较Virtual DOM树即可
+            2.如果出现不是同一类型的组件,则将该组件判断为dirty Component,从而替换整个组件下的所有子节点
+        Element Diff真实的DOM渲染,结构差异的比较
+            1当节点属于同一层级时，diff提供了3种节点操作，分别为INSERT_MARKUP(插入)，MOVE_EXISTING(移动),REMOVE_NODE(删除)。
+
 
 /*************************************************************************************************/
 47.key的作用
+    key的作用是为了diff算法执行时更快的找到对应的节点,提高diff速度
+    key具有唯一性
 
 /*************************************************************************************************/
 48.react阻止事件冒泡
-
+    https://blog.csdn.net/w799766/article/details/82591372   
+    1.在没有涉及到原生事件注册只有react事件时,用e.stopPropagation()阻止冒泡
+    2.当document.addEventListener注册了原生事件后,用e.stopPropagation()是不能阻止与document之间的冒泡的,这时候
+    需要用到e.nativeEvent.stoplmmedatePropagation()方法
+    3.阻止合成事件与非合成事件(除了document)之间的冒泡,以上两种方式都不适用,需要用e.target判断
 /*************************************************************************************************/
 49.redux有什么用,什么是redux,为什么会出现
 
@@ -595,4 +615,12 @@
 55.react-router
 
 /*************************************************************************************************/
-56.
+56.e.target和e.currentTarget的区别
+    let ul = document.querySelectorAll('ul')[0];
+    let aLi = document.querySelectorAll('li')
+    ul.addEventListener('click', function(e) {
+        let oLi1 = e.target;
+        let oLi2 = e.currentTarget
+        console.log(oLi1) // 被点击的li
+        console.log(oLi2) // ul
+    })
