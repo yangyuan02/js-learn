@@ -612,20 +612,68 @@
     action:当view需要发起行为时,需要在当前位置出发action,即store.dispatch(addNote())
     reducer:当store收到action时,必须给出一个新的state,这样view才会发生变化,而这中state的计算过程就叫做reducer,而reducer方法是
     由store.dispatch方法来自动执行的,为此store需要知道reducer函数,做法就是生成store的时候将reducer传入createStore方法
-    
+
 
 /*************************************************************************************************/
 51.middlewares中间件
+    applyMiddlewares它是redux原生方法,作用是将所有中间件组成一个数组,一次执行
 
 /*************************************************************************************************/
 52.redux-trunk
+    import { applyMiddleware, createStore } from 'redux';
+    const store = createStore(reducer, applyMiddleware(thunk, logger))
+    让action接受一个返回函数的action creator如果这个action creator返回的是一个函数,就执行它,如果不是就按照原来的next(action)执行
+    export function addCount() {
+        return {type :ADD_COUNT}
+    }
+    export function addCountAsync() {
+        return dispatch => {
+            setTimeout(() => {
+                dispatch(addCount())
+            }, 2000)
+        }
+    }
 
 /*************************************************************************************************/
 53.connect如果连接react和redux
-
+    https://www.cnblogs.com/passkey/p/9910760.html
+    首先在最外层容器中,把所有内容包裹在Provider组件中,将之前创建的store作为prop传给Provider
+    Provider内的任何一个组件,如果需要使用state中的数据,就必须被connect过
 /*************************************************************************************************/
-54.mapStateToProps,mapDispathToProps
+54.mapStateToProps,mapDispatchToProps
+    connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
+    mapStateToProps(state, ownProps): stateProps
+        这个函数允许我们将store中的数据作为props绑定到组件上,这个函数的第一个参数就是redux的store,我们从中摘取了count属性
+        因为返回了具有count属性的对象,所以组件会有名为count的props字段
+        const mapStateToProps = (state) => {
+            return state.count;
+        }
+        函数的第二个参数ownProps是组件组件的props,比如在store中维护了一个用户列表,而你只关心一个用户
+        const mapStateToProps = (state, ownProps) => {
+            return user: _find(state.userList, {id: ownProps.userId})
+        }
+        当state变化,或者ownProps变化的时候,mapStateToProps都会被调用,计算出一个新的stateProps
 
+    mapDispatchToProps
+        mapDispatchToProps它的功能是,将action作为props绑定到组件上
+        const mapDispatchToProps = (dispatch, ownProps) => {
+            return {
+                increase: (...args) => dispatch(actions.increase(...args)),
+                decrease: (...args) => dispatch(actions.defineProperty(...args))
+            }
+        }
+        调用actions.increase方法返回了具有increase属性和decrease的对象,这两个属性也成为props
+        调用actions.increase()只能得到一个action对象{type:'INCREASE'},需要出发这个action必须在store上调用dispatch方法,
+        dispatch是mapDispatchToProps第一个参数
+        同样ownProps变化也好生成一个新的
+    bindActionCreators
+        import {bindActionCreators} from 'redux';
+        const mapDispatchToProps = (dispatch, ownProps) => {
+        return bindActionCreators({
+            increase: action.increase,
+            decrease: action.decrease
+        });
+        }
 /*************************************************************************************************/
 55.react-router
 
