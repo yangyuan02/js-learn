@@ -595,7 +595,18 @@
     3.阻止合成事件与非合成事件(除了document)之间的冒泡,以上两种方式都不适用,需要用e.target判断
 /*************************************************************************************************/
 49.redux有什么用,什么是redux,为什么会出现
-
+    为什么用redux
+        因为对于react来说,同级组件之间的通信尤为麻烦,或者太麻烦,所以我们把所有需要多个组件使用的state拿出来,整合到顶部容器
+        ,进行分发
+    react-router-redux
+        顶层容器Provider,里面有很多小盒子(Component),小盒子之间不能通信,每个盒子都有一个壳子,state穿不过去,于是就有connect
+        来进行连接state和Component
+    Provider作为顶层容器接受store作为参数,进行state分发,在这里,state并不是清晰的设置一个对象,所有的共享数据都在里面,而是由多个
+    reducer组成,每个reducer有一个小小的state,多个小的state就组成了一个大的state，Provider在所有的router最外层
+    connect存在于每个需要共享的数据的组件里,connect方法接受两个参数
+        mapStateToProps:mapStateToProps接受state和当前组件的props作为参数
+        mapDispatchToProps:它接受dispatch作为参数,将当前组件会用到的dispatch(action)映射到当前组件的事件的回调函数上,换个
+        名字注入到props里面,然后在组件内部调用
 /*************************************************************************************************/
 50.action,reducer,store以及三者之间的关系
 
