@@ -609,6 +609,10 @@
         名字注入到props里面,然后在组件内部调用
 /*************************************************************************************************/
 50.action,reducer,store以及三者之间的关系
+    action:当view需要发起行为时,需要在当前位置出发action,即store.dispatch(addNote())
+    reducer:当store收到action时,必须给出一个新的state,这样view才会发生变化,而这中state的计算过程就叫做reducer,而reducer方法是
+    由store.dispatch方法来自动执行的,为此store需要知道reducer函数,做法就是生成store的时候将reducer传入createStore方法
+    
 
 /*************************************************************************************************/
 51.middlewares中间件
