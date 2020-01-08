@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2019-09-23 14:09:40
  * @Email: 1367511704@qq.com
- * @LastEditTime : 2020-01-08 11:21:58
+ * @LastEditTime : 2020-01-08 14:12:01
  * @Description: 
  */
 // https://juejin.im/post/58287452570c3500587642b6
@@ -136,4 +136,11 @@ const getDecimalValue = head => {
         currentHead = currentHead.next;
     }
     return Number,parseInt(ans, 2);
+}
+
+function insert(arr, index, data) {
+    for (let i = arr.length; i > index; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[index] = data;
 }
