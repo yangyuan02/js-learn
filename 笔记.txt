@@ -743,4 +743,6 @@ new Promise(function(resolve,reject){
 // console.log('打印3')
 // console.log('打印4')
 // console.log('打印2')
+
 /*************************************************************************************************/
+60.vue defineProperty/proxy区别
