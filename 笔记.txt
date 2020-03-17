@@ -729,4 +729,18 @@
     优化 resolve.extensions 配置
     优化 module.noParse 配置
     
-
+/*************************************************************************************************/
+59.EventLoop
+console.log('打印'+1);
+setTimeout(function(){
+    console.log('打印'+2);
+})
+new Promise(function(resolve,reject){
+        console.log('打印'+3);
+      }).then(
+  console.log('打印'+4));;
+// console.log('打印1')
+// console.log('打印3')
+// console.log('打印4')
+// console.log('打印2')
+/*************************************************************************************************/
