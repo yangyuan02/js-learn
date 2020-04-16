@@ -1,0 +1,56 @@
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 50px, 0)
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+.act {
+    animation-name: fadeInUp;
+    animation-duration: 0.66s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.action {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+}
+
+.nub1 {
+    animation-delay: 0.2s;
+
+}
+
+.nub2 {
+    animation-delay: 0.4s;
+
+}
+
+.nub3 {
+    animation-delay: 0.6s;
+
+}
+
+.nub4 {
+    animation-delay: 0.8s;
+
+}
+
+/*
+<ul>
+    <li class="act action nub1"></li>
+    <li class="act action nub2"></li>
+    <li class="act action nub3"></li>
+    <li class="act action nub4"></li>
+</ul>
+*/
+
+/* 元素进入可视区域添加act类,动画左到右一次进入打开 */
