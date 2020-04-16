@@ -1,0 +1,58 @@
+/* <div class="container">
+    <div class="left"></div>
+    <div class="right"></div>
+</div> */
+
+.container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.left {
+    flex: 1;
+    border: 1px solid #ccc;
+}
+
+.right {
+    flex: 1 0 150px;
+    border: 1px solid #ccc;
+}
+
+/*
+  答案:左25px,右175px
+  简要分析:
+    左:扩张因子1,收缩因子1
+    右:扩张因子1,收缩因子为0,不收缩,自由宽度150px
+    右不能收缩可扩张,可扩张权值:200-150=50,50/夸张因子之和2=25,左右各扩张25
+*/
+
+/*
+flex: auto;
+flex: initial;
+flex: none;
+flex: 2;
+
+一个值, 无单位正数：flex-grow 
+flex: 2;
+
+ 一个值, 宽度/高度: flex-basis
+flex: 10em;
+flex: 30px;
+
+两个值: flex-grow | flex-basis
+flex: 1 30px;
+
+两个值: flex-grow | flex-shrink
+flex: 2 2;
+
+三个值: flex-grow | flex-shrink | flex-basis 
+flex: 2 2 10%;
+
+Global values
+flex: inherit;
+flex: initial;
+flex: unset;
+*/
