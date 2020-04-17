@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-03-23 14:44:51
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-03-23 17:34:51
+ * @LastEditTime: 2020-04-17 11:11:30
  * @Description:
  */
 
@@ -13,7 +13,7 @@ class Mvvm {
         this.$data = data;
         this.vm = this;
         new Observer(this.$data);
-        new Observer(this.vm);
+        new Compiler(this.vm);
     }
 }
 
@@ -44,7 +44,7 @@ class Observer {
             get() {
                 console.log("get");
                 return value;
-            }
+            },
         });
     }
 }
@@ -57,7 +57,7 @@ class Dep {
         this.subs.push(watcher);
     }
     notify() {
-        this.subs.forEach(watcher => {
+        this.subs.forEach((watcher) => {
             watcher.update();
         });
     }
@@ -128,7 +128,7 @@ class Compiler {
     }
     compiler(fragment) {
         let childNodes = fragment.childNodes;
-        [...childNodes].forEach(node => {
+        [...childNodes].forEach((node) => {
             let nodeType = node.nodeType;
             // 编译元素节点的内容
             if (nodeType === 1) {
@@ -166,8 +166,8 @@ let Utils = {
         },
         text: (node, value) => {
             node.textContent = value;
-        }
-    }
+        },
+    },
 };
 /*
     <div id="app">
@@ -180,6 +180,6 @@ let vm = new Mvvm({
     el: "#app",
     data: {
         msg: "ceshi",
-        web: "aaa"
-    }
+        web: "aaa",
+    },
 });

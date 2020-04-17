@@ -384,6 +384,7 @@
     int.addEventListener('input', function(e) {
         obj.msg = e.target.value;
     })
+    // Observer(数据劫持-观察者)、Dep(订阅收集-发布者)、Watcher(订阅者-角色)、Compiler(编译器)
 
 /*************************************************************************************************/
 17.vuex详解
