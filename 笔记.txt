@@ -563,9 +563,17 @@
         toString.call({}) === '[object Object]' // true
 /*************************************************************************************************/
 30.in 和hasOwnproperty区别
-    in判断的是对象的所有属性,包括对象实例及其原型的属性
+    function Person() {
+        this.age = '20'
+    }
+    Person.prototype.name = 'lisi'
+    var p = new Person();
+    in判断的是对象的所有属性,包括对象实例及其原型的属性(回向原型查找)
+        'age' in p // true
+        'name' in p // true
     hasOwnProperty则是判断对象实例是否具有某个属性
-
+        p.hasOwnProperty('age') // true
+        p.hasOwnProperty('name') // false
 /*************************************************************************************************/
 31.JS垃圾回收机制
     一般来说没有被引用的对象就是垃圾,就是要被清楚,有一个例外如果几个对象引用形成一个环,互相引用,但根本访问不到它们,
