@@ -225,6 +225,35 @@
                         this.function = this.firstName + '' + val
                     }
                 }
+        // 随着输入框变化而立即执行,输入才会监听(不会立即执行)     
+        watch:{
+            firstName(newName,oldName){
+                this.fullName = newName + '' + this.lastName;
+            }
+        }
+        watch:{
+            firstName:{
+                handler(newName, oldName){
+                    this.fullName = newName + '' + this.lastName;
+                },
+                immediate:true, // 代表在watch里声明了firstName这个方法之后立即执行handler方法(立即执行)
+                deep: true //深入观察,监听器会一层层往下遍历,给对象所有熟悉都加上监听器,性能开销就会非常大
+            }
+        }
+        watch:{
+            'obj.a':{ // 优化---监听字符串key的形式
+                handler(newName,oldName) {
+
+                }
+            }
+        }
+        // 监听路由
+        watch:{
+            '$route'(to,from) {
+
+            }
+        }
+        需要及时注销watch,当然我们写在组件中，他会随着组件消失而消失
         methods
             方法,只要调用就好重新执行一次,相应的有一些触发条件,在某些时候methods和computed看不出茶杯,运算量比较大就会体现出来
             computed是具有缓存的,只要计算属性依赖没有相应的进行数据更新,那么computed是直接从缓存中获取值的
@@ -280,6 +309,9 @@
         2获取子组件中的data
         3调用子组件中的方法
         4子组件调用父组件的方法
+    vm.$refs一个对象,持有已经注册过ref的所有子组件
+    <input type="text" ref="input"> // ref:string是注册
+    console.log(this.$refs.input) //$refs所有子组件
 
 /*************************************************************************************************/
 15.vue中slot插槽
