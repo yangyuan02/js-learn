@@ -269,6 +269,47 @@
     父组件与子组件
         父组件传给子组件:子组件通过props方法接受数据
         子组件传给父组件:$emit方法传递参数
+            子组件vm.$emit(eventName,arg)
+            父组件vm.$on(event,fn)
+                子组件
+                    <template>
+                        <div class="train-city">  
+                            <span @click='select(`大连`)'>大连</span>  
+                        </div>  
+                    </template>  
+                    <script>  
+                        export default {  
+                        name:'trainCity',  
+                        methods:{  
+                            select(val) {  
+                                let data = {  
+                                    cityname: val  
+                                };  
+                                this.$emit('showCityName',data);//select事件触发后，自动触发showCityName事件  
+                                }  
+                            }  
+                        }
+                    </script>
+                父组件
+                    <template>  
+                        <trainCity @showCityName="updateCity" :index="goOrtoCity"></trainCity> //监听子组件的showCityName事件。  
+                    <template>  
+                    <script>
+                        export default {  
+                            name:'index',  
+                            data () {  
+                            return {  
+                                toCity:"北京"  
+                                }  
+                            },  
+                            methods:{  
+                                updateCity(data){//触发子组件城市选择-选择城市的事件    
+                                this.toCity = data.cityname;//改变了父组件的值  
+                                console.log('toCity:'+this.toCity)        
+                                }  
+                            }  
+                        }
+                    </script>  
     非父组件,兄弟组件传值
         eventBus,创建一个事件中心,相当于中转站,可以用来传递事件和接受事件,也可以使用vuex
 
