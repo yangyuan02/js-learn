@@ -401,7 +401,8 @@
         5.overflow值不为visible的元素
         6弹性元素(dispaly为flex或inline-flex元素的直接子元素)
         ...
-    解决bfc-bug
+    表现:比如一个元素float了,导致父级高度坍塌
+    解决bfc-bug(创建一个新的bfc)
         1通常做法是设置父元素的overflow非visible的值
         2clear浮动
     
@@ -550,9 +551,16 @@
 
 /*************************************************************************************************/
 29.instanceof和typeof区别
-    instanceof用于判断某个变量是否是某个对象的实例,返回值为true或false
-    typeof通常判断内置数据类型,返回值为number,string,boolean,function,undefined,object
-
+    instanceof用于判断实例是否属于原型对象,返回值false/true
+        function Person(){}
+        var p = new Person()
+        p instanceof Person // true
+        var arr = new Array()
+        arr instanceof 
+    typeof 通常判断内置数据类型,返回值为number,string,boolean,function,undefined,object
+        typeOf '11' === string // true
+        toString.call([]) === '[object Array]' // true
+        toString.call({}) === '[object Object]' // true
 /*************************************************************************************************/
 30.in 和hasOwnproperty区别
     in判断的是对象的所有属性,包括对象实例及其原型的属性
@@ -823,6 +831,3 @@ new Promise(function(resolve,reject){
 
 /*************************************************************************************************/
 61.常见的兼容性问题有哪些
-
-/*************************************************************************************************/
-62.es5类和es6class有什么区别?
