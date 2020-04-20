@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2018-11-21 22:03:15
  * @Email: 1367511704@qq.com
- * @LastEditTime : 2020-01-16 20:19:18
+ * @LastEditTime: 2020-04-20 13:56:52
  * @Description:
  */
 function uniqArr(arr) {
@@ -458,3 +458,16 @@ function getEN() {
     }
     return arr.join("");
 }
+// 编程题：compose实现
+
+const add = num => num  + 10
+const multiply = num => num * 2
+const foo = compose(multiply, add)
+foo(5) => 30
+
+const add = num => num  + 10;
+const multiply = num => num * 2;
+const foo = compose(multiply, add);
+foo(5) => 30
+
+export default function compose(...funcs) {  if (funcs.length === 0) {    return arg => arg  }  if (funcs.length === 1) {    return funcs[0]  }  return funcs.reduce((a, b) => (...args) => a(b(...args)))}
