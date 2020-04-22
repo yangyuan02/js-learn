@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 11:27:19
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-22 14:17:27
+ * @LastEditTime: 2020-04-22 15:29:50
  * @Description:
  */
 import Vue from "vue";
@@ -54,9 +54,11 @@ afterEach((to, from) => {
             name:'news',
             component:News
         }
-        组件name命令路由传递参数需要使用params来传递,这里一定要注意使用params不是query,目标页面接受传递参数时使用params
+        组件name命令路由:传递参数需要使用params来传递,这里一定要注意使用params不是query,目标页面接受传递参数时使用params
             跳转:this.$router.push({name:'news',params:{id:123}})
             接受:this.$route.params.id
         
-
+        查询参数:传递参数使用query而且必须配合path来传递而不能使用name,目标页面接受传递参数使用query
+            跳转:this.$router.push({path:'/news,query:{id}})
+            接受:this.$route.query.id
 */
