@@ -57,3 +57,18 @@
             初始化：启动构建，读取与合并配置参数，加载 Plugin，实例化 Compiler。
             编译：从 Entry 发出，针对每个 Module 串行调用对应的 Loader 去翻译文件内容，再找到该 Module 依赖的 Module，递归地进行编译处理。
             输出：对编译后的 Module 组合成 Chunk，把 Chunk 转换成文件，输出到文件系统
+
+/*************************************************************************************************/
+5.Tree Shaking的使用和原理分析(https://jkfhto.github.io/2019-10-17/webpack/Tree-Shaking%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/)
+    概念:1个模块可能有很多个方法,只要其中的某个方法使用到了,则整个文件都会被打到bundle里面去,tree shaking就只把用到的
+        方法导入到bundle,没用到的方法会在uglify阶段被擦除掉
+    使用:webpack默认支持,在.babelrc里设置module:false即可
+        production mode的情况下默认开启
+    要求:必须是es6语法,CommonJs方式不开启
+        需要tree shaking的模块代码是没有副作用的,否则tree shaking会失效
+    原理:
+        利用es6模块的特点
+            只能作为模块顶层语句出现
+            import的模块名只能是字符串常量,不能动态引入模块
+            import binding是immutable的,引入模块不能再进行修改
+        代码擦除:uglify删除无用代码
