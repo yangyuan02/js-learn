@@ -1,0 +1,24 @@
+/*************************************************************************************************/
+1.使用webpack如何做按需加载
+    webpack1.x中提供了require.ensure()
+        required.ensure([],function(){
+            required('b')
+        })
+        webpack在编译时,会静态地解析代码中的require.ensure(),同时将[模块b],添加到一个分开的chunk中。
+        这个新的chunk会被webpack通过jsonp来按需加载
+    webpack2.x中提供了import()
+        import('./myModule.js').then(myModule => {
+            console.log(myModule.default)
+        })
+
+/*************************************************************************************************/
+2.filename和chunkFilename的区别
+    output.filename决定了每个入口(entry)输出bundle的名称
+    output.chunkFilename决定了非入口(not-entry)chunk文件的名称
+    常用的webpack配置如下
+        module.exports = {
+            output:{
+                filename: '[name].[hash].bundle.js',
+                chunkFilename: '[name].[hash].chunk.js'
+            }
+        }
