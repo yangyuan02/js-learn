@@ -25,13 +25,37 @@
 6.浏览器缓存
 
 /*************************************************************************************************/
-7.ContentType 模式，formData 里面是什么结构
-
+7.ContentType 有哪些，formData 里面是什么结构(https://www.cnblogs.com/xiaozong/p/5732332.html)
+    1.application/x-www-form-urlencoded
+        POST http://www.example.com HTTP/1.1
+        Content-Type: application/x-www-form-urlencoded;charset=uft-8;
+        title=测试&sub=12
+    
+    2.multipart/form-data(一般用户文件上传)
+        POST http://www.example.com HTTP/1.1
+        Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA
+        
+        ------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+        Content-Disposition: form-data; name="text"
+        
+        title
+        ------WebKitFormBoundaryrGKCBY7qhFd3TrwA
+        Content-Disposition: form-data; name="file"; filename="chrome.png"
+        Content-Type: image/png
+        
+        PNG ... content of chrome.png ...
+        ------WebKitFormBoundaryrGKCBY7qhFd3TrwA--
+    3.application/json
+        POST http://www.example.com HTTP/1.1
+        Content-Type: application/json;charset=utf-8
+        {"title":"test","sub":[1,2,3]}
 /*************************************************************************************************/
 8.在上家公司遇到了什么问题，怎么解决的，技术和非技术都可以说说
 
 /*************************************************************************************************/
 9.base64 是什么
+    Base64是网络上最常见的用于传输8Bit字节码的编码方式之一，Base64就是一种基于64个可打印字符来表示二进制数据的方法。可查看RFC2045～RFC2049，上面有MIME的详细规范。
+    Base64编码是从二进制到字符的过程，可用于在HTTP环境下传递较长的标识信息。采用Base64编码具有不可读性，需要解码后才能阅读
 
 /*************************************************************************************************/
 10.for in 与Object.keys()的区别
@@ -51,3 +75,24 @@
     for(var key in man) {
         console.log(key) // name age sex
     }
+
+/*************************************************************************************************/
+11.Promise 有哪些方法，都是做什么的
+    Promise.all()是并行的吗
+/*************************************************************************************************/
+12.BFC 的原理和使用场景
+
+/*************************************************************************************************/
+13.如何并发执行 async
+
+/*************************************************************************************************/
+14.几道看输出的题目，考察变量声明提升，暂时性死区，原型链
+
+/*************************************************************************************************/
+15.说几个 HTTP Content-Type
+
+/*************************************************************************************************/
+16.显示器刷新率与浏览器帧率
+
+/*************************************************************************************************/
+17.requestanimationframe settimeout区别
