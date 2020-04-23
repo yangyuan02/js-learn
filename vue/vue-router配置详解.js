@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 11:27:19
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-22 15:29:50
+ * @LastEditTime: 2020-04-23 10:31:48
  * @Description:
  */
 import Vue from "vue";
@@ -27,6 +27,9 @@ export default new Router({
 
 // 全局钩子函数
 beforeEach((to, from, next) => {
+    // to:router即将进入的路由对象
+    // from:当前导航即将离开的路由
+    // nexf:function进行管道中的一个钩子,
     // 所有路由进入,出去都会触发此钩子函数
     // to and from are both route objects. must call `next`.
 });
@@ -34,7 +37,37 @@ beforeEach((to, from, next) => {
 afterEach((to, from) => {
     // 跳转后,我们可以做一些操作
 });
+/**
+ * 一般用法
+ * router.beforeEach((to, from, next) => {
+  if (to.name == 'hdInsuranceLogin' && window.localStorage.getItem('moblie')) {
+    //解决登陆后 用户输入登录地址重定向到首页
+    next({ path: '/activity/hd/insurance/serverNianJian' });
+  }
 
+  if (to.meta.requireLogin) {
+    // 页面是否需要登录
+    if (window.localStorage.getItem('moblie')) {
+      // token是否存在
+      next();
+    } else {
+      next({ path: '/activity' });
+    }
+  } else {
+    // 不需要登录的直接next()
+    next();
+  }
+});
+
+router.afterEach(to => {
+  document.title = to.meta.title;
+  const bgColor = to.meta.bgColor;
+  if (bgColor) {
+    document.body.style.backgroundColor = bgColor;
+  }
+});
+
+ */
 // 组件内钩子函数
 // beforeRouteEnter+beforeRouteUpdate+beforeRouteLeave ----> to/from/next都有这三个参数
 
