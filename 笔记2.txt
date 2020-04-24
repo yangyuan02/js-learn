@@ -93,6 +93,9 @@
 
 /*************************************************************************************************/
 16.requestanimationframe setTimeout区别(https://www.cnblogs.com/codejoker/p/10503251.html)
+    1间隔时间不精确，可能被阻塞。计时器的间隔指的是将回调函数推入任务队列的间隔时间，任务队列中的任务只有在主线程任务执行完毕后才会被执行。
+    2计时器动画的间隔时间如果设定过短就会出现过度渲染占用大量资源，如果设定过长就会影响动画的流畅度。只能够估计合适的时间间隔。
+    3多数浏览器对于计时器动画没有优化
 
 17.js单线程,异步,同步概念(https://www.cnblogs.com/sunmarvell/p/9564815.html)(https://www.cnblogs.com/hity-tt/p/6733062.html)(https://blog.csdn.net/RedaTao/article/details/81504532)
     js单线程:js是单线程的(如果一个线程删除dom,一个线程增加dom,浏览器会傻逼.所以只能单着了),虽然webWorker的多线程出现,但也是在主线程的控制下
