@@ -78,6 +78,8 @@
 
 /*************************************************************************************************/
 11.Promise 有哪些方法，都是做什么的
+    Promise.resolve(value)方法返回一个以给定值解析后的Promise 对象
+    Promise.reject()方法返回一个带有拒绝原因的Promise对象。
     Promise.all(iterable)
         function promise1 () {
             return new Promise(resolve => {
