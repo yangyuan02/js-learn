@@ -78,7 +78,72 @@
 
 /*************************************************************************************************/
 11.Promise 有哪些方法，都是做什么的
-    Promise.all()是并行的吗
+    Promise.all(iterable)
+        function promise1 () {
+            return new Promise(resolve => {
+                console.log('promise1 start');
+                setTimeout(() => {
+                console.log('promise1 over');
+                resolve();
+                }, 100);
+            })
+        }
+        function promise2 () {
+            return new Promise(resolve => {
+                console.log('promise2 start');
+                setTimeout(() => {
+                console.log('promise2 over');
+                resolve();
+                }, 90);
+            })
+        }
+
+        Promise.all([promise1(), promise2()]) // promise1 start -> promise2 start -> promise2 over -> promise1 over
+        all()里面接受promise对象,只有里面所有的resolved才会整个结果resolved
+        all()是并行执行的,all()获得成功结果数组里面的数据顺序和all()接收到数据顺序是一致的,不会因为相应顺序而改变
+    Promise.race(iterable)
+        方法返回一个 promise，一旦迭代器中的某个promise解决或拒绝，返回的 promise就会解决或拒绝
+        返回值:一个待定的 Promise 只要给定的迭代中的一个promise解决或拒绝，就采用第一个promise的值作为它的值，从而异步地解析或拒绝（一旦堆栈为空
+        var p1 = new Promise(function(resolve, reject) { 
+            setTimeout(resolve, 500, "one"); 
+        });
+        var p2 = new Promise(function(resolve, reject) { 
+            setTimeout(resolve, 100, "two"); 
+        });
+
+        Promise.race([p1, p2]).then(function(value) {
+        console.log(value); // "two"
+        // 两个都完成，但 p2 更快
+        });
+
+        var p3 = new Promise(function(resolve, reject) { 
+            setTimeout(resolve, 100, "three");
+        });
+        var p4 = new Promise(function(resolve, reject) { 
+            setTimeout(reject, 500, "four"); 
+        });
+
+        Promise.race([p3, p4]).then(function(value) {
+        console.log(value); // "three"
+        // p3 更快，所以它完成了              
+        }, function(reason) {
+        // 未被调用
+        });
+
+        var p5 = new Promise(function(resolve, reject) { 
+            setTimeout(resolve, 500, "five"); 
+        });
+        var p6 = new Promise(function(resolve, reject) { 
+            setTimeout(reject, 100, "six");
+        });
+
+        Promise.race([p5, p6]).then(function(value) {
+        // 未被调用             
+        }, function(reason) {
+        console.log(reason); // "six"
+        // p6 更快，所以它失败了
+        });
+
 /*************************************************************************************************/
 12.BFC 的原理和使用场景
 
@@ -93,10 +158,15 @@
 
 /*************************************************************************************************/
 16.requestanimationframe setTimeout区别(https://www.cnblogs.com/codejoker/p/10503251.html)
-    1间隔时间不精确，可能被阻塞。计时器的间隔指的是将回调函数推入任务队列的间隔时间，任务队列中的任务只有在主线程任务执行完毕后才会被执行。
-    2计时器动画的间隔时间如果设定过短就会出现过度渲染占用大量资源，如果设定过长就会影响动画的流畅度。只能够估计合适的时间间隔。
-    3多数浏览器对于计时器动画没有优化
+    requestanimationframe
+        1间隔时间不精确，可能被阻塞。计时器的间隔指的是将回调函数推入任务队列的间隔时间，任务队列中的任务只有在主线程任务执行完毕后才会被执行。
+        2计时器动画的间隔时间如果设定过短就会出现过度渲染占用大量资源，如果设定过长就会影响动画的流畅度。只能够估计合适的时间间隔。
+        3多数浏览器对于计时器动画没有优化
+    setTimeout
+        requestAnimationFrame 动画的帧数是由系统根据当前页面是否可见，CPU 的占用情况等等来决定的，可以最大化地利用系统性能。
+        浏览器对 requestAnimationFrame 动画进行了优化。
 
+/*************************************************************************************************/
 17.js单线程,异步,同步概念(https://www.cnblogs.com/sunmarvell/p/9564815.html)(https://www.cnblogs.com/hity-tt/p/6733062.html)(https://blog.csdn.net/RedaTao/article/details/81504532)
     js单线程:js是单线程的(如果一个线程删除dom,一个线程增加dom,浏览器会傻逼.所以只能单着了),虽然webWorker的多线程出现,但也是在主线程的控制下
             webWorker仅仅能进行计算任务,不能操作dom,所以本质上还是单线程
@@ -118,4 +188,47 @@
     异步任务:有分为宏任务和微任务(异步任务里面先执行微任务,在执行宏任务)
         宏任务: 宏任务一般包括：整体代码script，setTimeout，setInterval
         微任务:Promise，process.nextTick
-    
+/*************************************************************************************************/
+18浏览器是否会发送图片请求？元素隐藏display:none,class不存在的元素背景图片(https://blog.csdn.net/clear_love8/article/details/97632574)
+    1. 隐藏图片
+        <img src="haorooms.jpg" style="display: none" />  
+        结论：只有Opera不产生请求。 注意：用visibility: hidden隐藏图片时，在Opera下也会产生请求。
+    2. 重复图片
+        <img src="haorooms.jpg" />  
+        <img src="haorooms.jpg" />  
+        结论：所有浏览器都只产生一次请求 。
+    3. 重复背景
+        <style type="text/css">   
+        .test1 { background: url(haorooms.jpg) }   
+        .test2 { background: url(haorooms.jpg) }   
+        </style>   
+        <div class="test1">test1</div>   
+        <div class="test2">test2</div> 
+        结论：所有浏览器都只产生一次请求
+    4. 不存在的元素的背景
+        <style type="text/css">   
+        .test1 { background: url(haorooms.jpg) }   
+        .test2 { background: url(http2.jpg) } /* 页面中没有class为test2的元素 */  
+        </style>   
+        <div class="test1">test1</div>  
+        结论：背景仅在应用的元素在页面中存在时，才会产生请求。这对CSS框架来说，很有意义。
+    5.隐藏元素的背景
+        <style type="text/css">   
+        .test1 { background: url(haorooms.jpg); display: none; }   
+        .test2 { background: url(http2.jpg); visibility: hidden; }   
+        </style>   
+        <div class="test1">test1</div> 
+        结论：Opera和Firefox对于用display: none隐藏的元素背景，不会产生HTTP请求。仅当这些元素非display: none时，才会请求背景图片。
+    6.多重背景
+        <style type="text/css">   
+        .test1 { background: url(haorooms.jpg); }   
+        .test1 { background: url(http2.jpg); }   
+        </style>   
+        <div class="test1">test1</div>  
+        上面这段代码的http请求，只会请求http2.jpg这一张图片，原因是test1的class把上面的给覆盖掉了，所有只请求后面的一张图片！
+    假如用css3多张背景图片的写法：
+        <style type="text/css">   
+        .test1 { background-image:url("haorooms.jpg"),url("http2.jpg"); }   
+        </style>   
+        <div class="test1">test1</div> 
+        webkit引擎浏览器对背景图都请求，是因为支持CSS3中的多背景图。
