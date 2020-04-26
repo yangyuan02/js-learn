@@ -1,20 +1,24 @@
 /*************************************************************************************************/
-1.new 操作符具体做了什么？
-    var Fn = function() {}
-    var fnObj = new Fn();
+1.new 操作符具体做了什么？(https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)
+    创建一个空的简单JavaScript对象（即{}）；
+    链接该对象（即设置该对象的构造函数）到另一个对象 ；
+    将步骤1新创建的对象作为this的上下文 ；
+    如果该函数没有返回对象，则返回this
+        var Fn = function() {}
+        var fnObj = new Fn();
 
-    1创建一个空对象
-    var obj = new Object();
-    2设置原型链
-    obj._proto_ = Fn.prototype;
-    3让Fn的this指向obj,并执行Fn的函数体
-    var result = fn.call(obj)
-    4判断Fn的返回值类型,如果是值类型,返回obj,如果是引用类型,就返回这个引用类型的对象
-    if(typeof result === 'object) {
-        fnObj = result;
-    } else {
-        fnObj = obj;
-    }
+        1创建一个空对象
+        var obj = new Object();
+        2设置原型链
+        obj._proto_ = Fn.prototype;
+        3让Fn的this指向obj,并执行Fn的函数体
+        var result = fn.call(obj)
+        4判断Fn的返回值类型,如果是值类型,返回obj,如果是引用类型,就返回这个引用类型的对象
+        if(typeof result === 'object) {
+            fnObj = result;
+        } else {
+            fnObj = obj;
+        }
 
 /*************************************************************************************************/
 2.原型链,原型,构造函数之间的关系总结
