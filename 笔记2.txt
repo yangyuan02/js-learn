@@ -247,3 +247,24 @@
         3.如果一个操作数是对象，另一个操作数不是，则调用对象的 valueOf()方法，用得到的基本类型值按照前面的规则进行比较; 这两个操作符在进行比较时则要遵循下列规则
         4.null 和 undefined 是相等的
     
+/*************************************************************************************************/
+20.vue生命周期做了什么(https://www.cnblogs.com/wwhhq/p/8306420.html)
+    beforeCreated:
+        初始化了vue的空实例,data和method中的数据都未初始化(此时无法访问到el属性和data属性)
+    created
+        这时候data和method都初始化好了,所以最早调用method中的方法,可以写在created中(属性已绑定,但dom还未生成$el属性还不存在)
+    beforeMount
+        这时候vue中的指令进行执行最终生成编译好的字符串模板并寄存在了虚拟的dom中,并没有真正生成到页面上(模板编译/挂载之前)
+    mounted
+        将在上一个阶段编写好存在内存中的虚拟dom真正挂载到了页面上,这是实例就已经完成创建好了(模板编译/挂载之后)
+    beforeUpdate
+        console.log(this.$el.innerHTML)组件更新之前,此时,元素的真实dom内容还未改变
+    updated
+        组件更新之后
+        console.log(this.$el.innerHTML)组件更新之前,此时,元素的真实dom内容已经改变
+    beforeDestroy
+        组件销毁之前
+        console.log(this.$el) console.log(this.message) 都还存在
+    destroy
+        组件销毁之后
+            实例销毁后虽然dom和属性方法都还存在,但改变他们都不再生效
