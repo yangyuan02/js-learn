@@ -1,0 +1,59 @@
+/******************************keep-alive*********************************
+1.keep-alive(https://www.jianshu.com/p/9523bb439950)
+    keep-alive是什么
+        是一个抽象组件:它自身不会渲染一个dom元素,也不会出现负组件链中.
+        使用keep-alive包裹动态组件时会缓存不活动组件实列,而不是销毁它们
+    场景
+        用户在列表页筛选一份数据列表,由列表页进入数据详情页,再返回列表页,我们希望用户记住选中状态
+    使用
+        在动态组件中使用
+            <keep-alive :include="whiteList" :exclude="blackLis" :max="amount">
+                <component :is="currentComponent"></component>
+            </keep-alive>
+        在vue-router中应用
+            <keep-alive :include="whiteList" :exclude="blackLis" :max="amount">
+                <router-view></router-vuew>
+            <keep-alive>
+        include定义缓存白名单,keep-alive会缓存命中的组件,exclude定义缓存黑明白.被命中的组件将不会缓存
+        max定义缓存组件上限,超出上限使用LRU的策略置换缓存数据
+    源码解析 // src/core/component/keep-alive.js
+    export default {
+        name:'keep-alive',
+        abstract:true, // 判断当前组件虚拟dom是否渲染成真实的dom关键
+        props:{
+            include:patternTypes, // 缓存白名单
+            exclude:patternTypes, // 缓存黑名单
+            max: [String, Number] // 缓存的组件
+        },
+        created(){
+            this.cache = Object.create(null) // 缓存虚拟dom
+            this.keys = [] // 缓存的虚拟dom集合
+        },
+        destroyed(){
+            for (const key in this.cache) {
+                // 删除所有的缓存
+                pruneCacheEntry(this.cache, key, this.keys)
+            }
+        },
+        mounted(){
+            // 实时监听黑明白的变动
+            this.$watch('include', val => {
+                pruneCache(this, name => matched(val, name))
+            }),
+            this.$watch('exclude', val => {
+                pruneCache(this, name => !matched(val, name))
+            })
+        },
+        render(){
+
+        }
+    }
+
+    function pruneCacheEntry(cache:VNodeCache,key:string,keys:Array<string>, current?:VNode) {
+        const cached = cache[key];
+        if (cached && !(current || cached.tag !== current.tag)) {
+            cached.componentInstance.$destroyed() // 执行组件的destroy钩子函数
+        }
+        cached[key] = null;
+        remove(keys, key)
+    }
