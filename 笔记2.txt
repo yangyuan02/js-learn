@@ -268,3 +268,23 @@
     destroy
         组件销毁之后
             实例销毁后虽然dom和属性方法都还存在,但改变他们都不再生效
+/*************************************************************************************************/
+21.vue组件render跟template对比(https://www.cnblogs.com/liqiang666/p/12175465.html)
+    使用render函数没有编译过程,相当于使用者直接将代码给程序
+    Vue.component('anchored-heading', {
+        render:function(createElement){
+            return createElement(
+                    'h' + this.level, // tag name标签名称
+                    this.$slots.default // 子组件中的阵列
+                )
+        },
+        props: {
+            level:{
+                type:Number,
+                required:true
+            }
+        }
+    })
+
+/*************************************************************************************************/
+22.vue实例 property API使用方式
