@@ -310,3 +310,9 @@
             2.其他情况下DOMContentLoaded都不会等待css加载,并且DOMContentLoaded事件也不会等待图片,视频等其他资源加载
     onLoad:
         等待页面上所有资源都加载完成才会触发,这些资源包括css,js,图片视频等 
+
+/*************************************************************************************************/
+25.谈一下flex布局
+    flex是一种弹性布局,包括flex-container和flex-itme;
+    常用的属性包括flex-direction,flex-warp, justify-content,align-items
+    水平居中justify-content:center水平两头居中justify-content:space-between垂直居中align-items:center
