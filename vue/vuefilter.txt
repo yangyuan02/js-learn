@@ -1,0 +1,26 @@
+在双花括号差值和v-bind表达式中实现通过管道符号指示|
+
+{{message | capitalize}}
+在v-bind中使用
+<div b-bind:id="rawId|formatId">
+
+组件中本地过滤器,局部过滤器
+filters:{
+    capitalize:function(value) {
+        if (!value) {
+            return '';
+        }
+        value = value.toString();
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    }   
+}
+// 全局过滤器
+Vue.filter('capitalize', function(value){
+    if (!value) {
+        return '';
+    }
+    value = value.toString();
+    return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+当全局过滤器和局部过滤器重名时，会采用局部过滤器
