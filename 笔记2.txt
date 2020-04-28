@@ -316,3 +316,7 @@
     flex是一种弹性布局,包括flex-container和flex-itme;
     常用的属性包括flex-direction,flex-warp, justify-content,align-items
     水平居中justify-content:center水平两头居中justify-content:space-between垂直居中align-items:center
+
+/*************************************************************************************************/
+26.v-if/v-show/v-html的原理
+    v-if会调用addIfCondition方法
