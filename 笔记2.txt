@@ -320,3 +320,18 @@
 /*************************************************************************************************/
 26.v-if/v-show/v-html的原理
     v-if会调用addIfCondition方法
+
+/*************************************************************************************************/
+27.Promise构造函数是同步执行还是异步执行,那么then方法呢
+    const promise = new Promise((resolve, reject) => {
+        console.log(1)
+        resolve()
+        console.log(2)
+    })
+
+    promise.then(() => {
+        console.log(3)
+    })
+    console.log(4)
+    // 1243
+    promise构造函数是同步执行的,then方法是异步执行的
