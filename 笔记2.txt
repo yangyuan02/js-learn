@@ -335,3 +335,13 @@
     console.log(4)
     // 1243
     promise构造函数是同步执行的,then方法是异步执行的
+
+/*************************************************************************************************/
+28.let、const变量不在window上
+    let a = '1';
+    let b = '2';
+    var c = '3'
+    window.a // undefined
+    window.b // undefined
+    window.c // '3'
+    let const 生成了块级作用域
