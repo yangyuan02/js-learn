@@ -87,6 +87,23 @@
 
 /*************************************************************************************************/
 5.http和https区别
+    http请求/响应报文结构
+        一个http请求报文由四个部分组成:请求行、请求头部、空行、请求数据
+        请求行
+            请求方法、Request URL、Request Method、Status Code，字段和http协议版本字段3个字段组成，分别用空格分隔
+        Response Header
+            请求头部
+                Content-Encoding:压缩方式
+                content-type数据类型格式
+                server:服务器
+                date:日期
+                Authorization:授权信息
+        Request Header
+            Cookie:
+            Host
+            Origin:来源
+            Referer:告诉服务器该网友从哪个页面过来的
+        
     http缺点
         1通信使用明文,内容可能被窃听
         2不验证通信方身份,有可能遭遇伪装
