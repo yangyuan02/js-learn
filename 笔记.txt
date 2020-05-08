@@ -27,10 +27,11 @@
     p1.prototype是undefined
     实例p1上面是没有prototype而是通过__proto__访问到Person.prototype
 
-    p1.construct=Person
-    p1.__proto__=Person.prototype
-    Person.prototype.__proto__=Object.prototype
-    Object.prototype.__proto__=null
+    这就是原型链的过程
+        p1.construct=Person
+        p1.__proto__=Person.prototype
+        Person.prototype.__proto__=Object.prototype
+        Object.prototype.__proto__=null
 
     一切底层对象上的原型的原型链等于对象的原型
     Function.prototype__proto__=Object.prototype
