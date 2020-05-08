@@ -1,7 +1,3 @@
-/*
- * @Author: yangyuan
- * @Date: 2020-05-08 19:53:52
- * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-08 19:53:54
- * @Description:
- */
+1.  class 组件与函数式组件的区别区别
+
+2.react 组件优化
