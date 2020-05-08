@@ -74,6 +74,8 @@
             import binding是immutable的,引入模块不能再进行修改
         代码擦除:uglify删除无用代码
         ast语法分析那些有用到的,那些没用到的
+    require 引入的模块 webpack 能做 Tree Shaking 吗
+        不能，Tree Shaking 需要静态分析，只有 ES6 的模块才支持
 
 /*************************************************************************************************/
 6.Webpack 热更新原理
@@ -85,3 +87,8 @@
     4.修改页面代码后,webpack监听到文件修改后,开始编译,编译完成后,发送build消息给客户端
     5.客户端获取到hash,成功后客户端构造hot-update.js script链接,然后插入主文档
     6.hot-update.js插入成功后,执行hotApi的createRecord和reload方法,获取到vue组件的render方法,重新render组件,继而实现ui无刷新更新
+
+/*************************************************************************************************/
+7.webpack 如何实现动态加载
+    import()和require.ensure
+    动态的创建 script 标签，以及通过 jsonp 去请求 chunk
