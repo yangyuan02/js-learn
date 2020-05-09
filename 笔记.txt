@@ -709,6 +709,7 @@
 
 /*************************************************************************************************/
 42.transition和animation之间区别
+    他们都是随时间改变元素的属性值，主要区别在于：transition需要触发一个事件才能改变属性，而animation不需要触发任何事件
     animation灵活,可以定义多个帧动画
         div{
             animation: name duration timing-function delay iteration-count direction
