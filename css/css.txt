@@ -10,4 +10,9 @@
     使用display:table-cell
         父盒子：display:table-cell; text-align:center; verticle-align:middle
         子盒子：display:inline-block; verticle-align:middle
+2.清除浮动
+    浮动产生的原因：如果一个div中的元素都是用float，那么就会造成父级div盒子不能被撑开，于是css的浮动就产生了
+    清除浮动
+        方法1：在最后加上<div class=’clear’></div>	使用空元素(不够用好产生了没用的div)
+        方法2：父级使用overflow:hidden 原理：触发BFC, 
 
