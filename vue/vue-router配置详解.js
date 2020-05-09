@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 11:27:19
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-23 10:31:48
+ * @LastEditTime: 2020-05-09 17:05:02
  * @Description:
  */
 import Vue from "vue";
@@ -95,3 +95,20 @@ router.afterEach(to => {
             跳转:this.$router.push({path:'/news,query:{id}})
             接受:this.$route.query.id
 */
+
+// 什么是前端路由
+
+// - hash模式
+// 这里的 hash 就是指 url 后的 # 号以及后面的字符。比如说 "www.baidu.com/#hashhash" ，其中 "#hashhash" 就是我们期望的 hash 值。
+// 由于 hash 值的变化不会导致浏览器像服务器发送请求，而且 hash 的改变会触发 hashchange 事件，浏览器的前进后退也能对其进行控制，所以在
+// H5 的 history 模式出现之前，基本都是使用 hash 模式来实现前端路由。
+
+// - history模式
+// history 新增了以下几个 API:
+// - history.pushState(); // 添加新的状态到历史状态栈
+// - history.replaceState(); // 用新的状态代替当前状态
+// - history.state // 返回当前状态对象
+
+// history.pushState() 和 history.replaceState() 均接收三个参数（state, title, url）
+// - state：合法的 Javascript 对象，可以用在 popstate 事件中
+// - title：现在大多浏览器忽略这个参数，可以直接用 null 代替
