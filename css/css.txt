@@ -1,0 +1,13 @@
+1.css垂直居中（让一个不定宽高的div垂直居中
+    使用flex
+        只需要在父盒子的DIV上设置：display:flex; justify-content:center;align-items:center
+    使用css3的transform
+        父盒子：position:relative
+        子盒子：position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);
+            其中transform属性允许我们对元素进行旋转，缩放，移动或者倾斜
+            Translate是transform的其中一个值，其作用就是将元素位移，沿着x,y轴去位移
+            原理：top50%和left50%实现对于父级的，而translate是相当于元素本身的位移
+    使用display:table-cell
+        父盒子：display:table-cell; text-align:center; verticle-align:middle
+        子盒子：display:inline-block; verticle-align:middle
+
