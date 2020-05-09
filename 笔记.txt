@@ -926,6 +926,8 @@ new Promise(function(resolve,reject){
 // console.log('打印4')
 // console.log('打印2')
 
+promise的构造函数部分是同步的,then函数会放在微任务那里
+
 /*************************************************************************************************/
 60.vue defineProperty/proxy区别
     vue是不能运行在低版本浏览器中的,因为低版本浏览器不支持defineProperty/propx的
