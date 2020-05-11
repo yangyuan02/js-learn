@@ -380,13 +380,14 @@
     https://www.cnblogs.com/agen-su/p/11388621.html
     ref被用来给元素或子元素注册引用信息,引用信息将会注册在父组件的$refs对象上,如果是普通dom元素上使用,引用指向dom元素
     如果用在子组件上,引用就指向组件实例
-        1获取dom元素
-        2获取子组件中的data
-        3调用子组件中的方法
+        <login ref="mylogin"></login>
+        1获取dom元素 =>得应用普通dom元素上
+        2获取子组件中的data =>应用在组件上this.$refs.mylogin.msg
+        3调用子组件中的方法 this.$refs.mylogin.show()
         4子组件调用父组件的方法
     vm.$refs一个对象,持有已经注册过ref的所有子组件
-    <input type="text" ref="input"> // ref:string是注册
-    console.log(this.$refs.input) //$refs所有子组件
+    <input type="text" ref="input"> // ref:string是注册(绑定)
+    console.log(this.$refs.input) //$refs(获取)所有子组件
 
 /*************************************************************************************************/
 15.vue中slot插槽
