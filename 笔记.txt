@@ -623,11 +623,11 @@
         var p = new Person()
         p instanceof Person // true
         var arr = new Array()
-        arr instanceof 
+        arr instanceof Array
     typeof 通常判断内置数据类型,返回值为number,string,boolean,function,undefined,object
         typeOf '11' === string // true
-        toString.call([]) === '[object Array]' // true
-        toString.call({}) === '[object Object]' // true
+        Object.prototype.toString.call([]) === '[object Array]' // true
+        Object.prototype.toString.call({}) === '[object Object]' // true
 /*************************************************************************************************/
 30.in 和hasOwnproperty区别
     function Person() {
