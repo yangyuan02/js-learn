@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2018-11-21 22:03:15
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-20 13:56:52
+ * @LastEditTime: 2020-05-11 14:52:40
  * @Description:
  */
 function uniqArr(arr) {
@@ -471,3 +471,29 @@ const foo = compose(multiply, add);
 foo(5) => 30
 
 export default function compose(...funcs) {  if (funcs.length === 0) {    return arg => arg  }  if (funcs.length === 1) {    return funcs[0]  }  return funcs.reduce((a, b) => (...args) => a(b(...args)))}
+
+
+// 实现一下$('.foo').css({color:'red'})
+
+const $ = function $(selector, context = document) {
+    const elements = Array.from(context.querySelectorAll(selector))
+    return {
+        elements,
+        html(newHtml) {
+            this.elements.forEach(element => {
+                element.innerHTML = newHtml;
+            })
+        },
+        css(newCss) {
+            this.elements.forEach(element => {
+                Object.assign(element.style,newCss)
+            })
+        },
+        on(event,handler,options){
+            this.elements.forEach(element => {
+                element.addEventListener(event, handler, options)
+            })
+            return this
+        }
+    }
+}
