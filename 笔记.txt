@@ -988,10 +988,10 @@ promise的构造函数部分是同步的,then函数会放在微任务那里
                 }
             },
             mounted(){
-                this.obj = {d:0};
+                this.obj = {d:0}; 动态新增的属性并不能相应,这个时候需要$set()方法解决
                 this.obj.e = 0;
             },
-            methods:{
+            methods:{ // 
                 add()  {
                     this.obj.d = this.obj.d + 1; // 并不会响应,因为defineProperty不能深层次的监听
                     // 解决
