@@ -16,3 +16,5 @@
         方法1：在最后加上<div class=’clear’></div>	使用空元素(不够用好产生了没用的div)
         方法2：父级使用overflow:hidden 原理：触发BFC, 
 
+
+3.画css3三角形

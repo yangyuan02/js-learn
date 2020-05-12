@@ -589,7 +589,10 @@
         function setCookie(){}
         function getCookie(){}
         function delCookie(){}
-
+    httpOnly:true
+    Secure:true
+    domain:域名
+    withCredentials: true
 /*************************************************************************************************/
 27.变量提升和函数提升
     var let const
@@ -1032,4 +1035,4 @@ promise的构造函数部分是同步的,then函数会放在微任务那里
     ，优化了触发浏览器reflow和repaint的次数
 
 /*************************************************************************************************/
-65.h5适配 rem/em区别
+65.h5适配 rem/em/pt/px区别
