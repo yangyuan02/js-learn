@@ -25,3 +25,7 @@
         border: 100px solid transparent;
         border-bottom: 100px solid blue;
     }
+4.flex:1缩写是什么
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
