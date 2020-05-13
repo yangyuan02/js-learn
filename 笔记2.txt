@@ -509,9 +509,42 @@
 30.双指针算法
 
 /*************************************************************************************************/
-31.flex:0 1 auto 解释
-    flex:1具体是怎样的,具体的属性
-
+31.flex:0 1 auto 解释 flex:1具体是怎样的(flex-grow: 1;flex-shrink: 1;flex-basis: 0%;),具体的属性
+    flex-grow:0
+    flex-shrink:1
+    flex-basic:0%
+    分析计算
+        .container{
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+        }
+        .left{
+            flex: 1;
+            border: 1px solid #ccc;
+        }
+        .right{
+            flex: 1 0 150px;
+            border: 1px solid #ccc;
+        }
+    <div class="container"> 
+        <div class="left"></div> 
+        <div class="right"></div>
+    </div>
+    第一步：分析容器和元素(不考虑边框border)
+        左元素：flex: 1，它会被当做 flex-grow: 1; flex-shrink: 1; flex-basis: auto; 扩张因子1，收缩因子1
+        右元素：flex: 1 0 150px;，它会被当做 flex-grow: 1; flex-shrink: 0; flex-basis: 150px;：扩张因子1，
+           收缩因子为0，不收缩，自由宽度150px；
+    第二步：分析子元素的收缩性
+        左元素可以伸缩和扩张，没有自由宽度
+        右元素不能收缩可扩张，自由宽度 150px
+    第三步：计算可扩张权益值和扩张因子和
+        扩张权益值：200 - 150 = 50px 扩张因子和：1 + 1 = 2
+    第四步：计算左右两个子元素的实际宽度
+        左元素 0 + 50px / 2 * 1 = 25px
+        右元素 150px + 50 / 2 * 1 = 175px
 /*************************************************************************************************/
 32.typescript里面type和interface的区别
     interface一般用于对对象的接口做类型判断,基础类型一般不用

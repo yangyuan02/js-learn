@@ -589,10 +589,16 @@
         function setCookie(){}
         function getCookie(){}
         function delCookie(){}
-    httpOnly:true
+    httpOnly
+        如果cookie中设置了HttpOnly属性，那么通过js脚本将无法读取到cookie信息，这样能有效的防止XSS攻击，窃取cookie内容
+        设置方法:response.addHeader("Set-Cookie", "uid=112; Path=/; HttpOnly")
     Secure:true
-    domain:域名
+        Secure属性规定cookie只能在https协议下才能够发送到服务器
+        设置方法:document.cookie = 'softwhy="青岛市南区";max-age=1200;path=/;secure;'
+    domain:
+        子域不同可以使用domain解决跨域问题
     withCredentials: true
+        表示跨域请求时是否需要使用凭证,服务器才能拿到你的cookie
 /*************************************************************************************************/
 27.变量提升和函数提升
     var let const
@@ -661,7 +667,9 @@
 
 /*************************************************************************************************/
 32.es5构造函数和es6class区别
-    super()
+    super关键字将单独出现，并且必须在使用this关键字之前使用。super关键字也可以用来调用父对象上的函数
+    super() // 调用父类的构造函数
+    super.show() // 调用父类的方法 父类上的静态方法
 
 /*************************************************************************************************/
 33.闭包
