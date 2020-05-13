@@ -18,3 +18,10 @@
 
 
 3.画css3三角形
+    <div id="triangle"></div>
+    #triangle{
+        width: 0;
+        height: 0;
+        border: 100px solid transparent;
+        border-bottom: 100px solid blue;
+    }
