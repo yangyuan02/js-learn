@@ -97,3 +97,58 @@
 8.webpack Hash哈希值生成方式
     静态资源缓存是前端性能优化的一个点，所以在前端开发过程中，一般会最大限度的利用缓存
     文件不会修改的情况下hash不会改变
+
+9.常用的插件
+    webpack-dev-server
+    插件plugin  plugins:[new Plugins()]
+        html-webpack-plugin
+            作用一是创建HTML页面文件到你的输出目录
+            作用二是将webpack打包后的chunk自动引入到这个HTML中
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: 'index.html',
+                inject: true
+            });
+        热更新
+        new webpack.HotModuleReplacementPlugin({
+            // Options...
+        })
+        代码压缩
+        new webpack.optimize.UglifyJsPlugin()
+        // 拆分代码配置项
+        optimization: {
+            splitChunks: {
+            cacheGroups: {
+                node_vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                chunks: 'async',
+                priority: 1
+                }
+            }
+            }
+        }
+    loader 使用方式
+        module:{
+                rules:[{
+                    test:/\.js$/,
+                    use:[{
+                        loader:'babel-loader',
+                        options:{
+                            presets:['react']
+                        }
+                    }]
+                }]
+            }
+        编译es6 
+            babel-loader  通过 babel-loader 使用 Babel
+            babel-core  编译器
+            babel-preset-latest  就是把所有es2015, es2016, es2017 全部包含在一起了
+            vue-loader
+        style loader ，loader的解析是逆序的
+            test:/\.css$/,
+              use:[
+                  'style-loader','css-loader','less-loader'
+              ]
+            css-loader：打包css文件和处理css文件
+            less-loader：加载less文件并且编译成css文件
+            style-loader：负责将css-loader加载到的css样式动态的添加到html -> head -> style标签中，style-loader尽量与css-loader结合使用
