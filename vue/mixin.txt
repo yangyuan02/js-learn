@@ -1,0 +1,32 @@
+4.vue中mixins
+    var mixin = {
+        methods:{
+            foo:function(){
+                console.log('foo')
+            },
+            conflicting:function(){
+                console.log('from mixin')
+            }
+        }
+    }
+    var vm = new Vue({
+        mixin:[mixin],
+        methods:{
+            bar:function(){
+                console.log('bar')
+            },
+            conflicting:function(){
+                console.log('from self')
+            }
+        }
+    })
+
+    vm.foo() // foo
+    vm.bar() // bar
+    vm.conflicting() // from self
+
+    1.minxins可以包含任意组件对象的选项(例如:methods, mounted等钩子函数, components, directives等等)
+
+    2.如果minxins对象的选项是钩子函数(created, mounted等)怎会先于组件的钩子函数执行
+
+    3.如果minxins对象的选项为对象(如methods, directives,components), 则会合并为同意对象, 如果键值发生冲突, 则会使用组件的键值对

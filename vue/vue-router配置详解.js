@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 11:27:19
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-09 17:05:02
+ * @LastEditTime: 2020-05-15 13:38:56
  * @Description:
  */
 import Vue from "vue";
@@ -112,3 +112,21 @@ router.afterEach(to => {
 // history.pushState() 和 history.replaceState() 均接收三个参数（state, title, url）
 // - state：合法的 Javascript 对象，可以用在 popstate 事件中
 // - title：现在大多浏览器忽略这个参数，可以直接用 null 代替
+
+// Vue Router路由守卫完整的导航解析流程
+/*
+        1.导航被触发
+        2.在失活的组件里调用离开守卫
+        3.调用全局的beforeEach守卫
+        4.在重用的组件里调用beforeRouteUpdate守卫
+        5.在路由配置里调用beforeEnter
+        6.解析异步组件
+        7.在被激活的组件里调用beforeRouterEnter
+        8.调用全局的beforeResolve守卫
+        9.导航被确认
+        10.调用全局的afterEach钩子
+        11.触发dom更新
+        12.用创建好的实例调用beforeRouteEnter守卫中传给next的回调函数
+
+*
+*/
