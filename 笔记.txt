@@ -1056,3 +1056,40 @@ promise的构造函数部分是同步的,then函数会放在微任务那里
     em相对于父元素的font-size大小
     pt是一种固定长度的度量单位,是能够使用测量设备测得的长度
     px是一个点，它不是自然界的长度单位，谁能说出一个“点”有多长多大么？可以画的很小，也可以很大
+    rem详解
+        设置视口不可缩放
+        <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        (function(win, doc) {
+                var flex = function flex() {
+                    var ua = navigator.userAgent;
+                    var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
+                    var UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
+                    var isUCHd = UCversion && parseInt(UCversion[1].split(".").join(""), 10) >= 80;
+                    var isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);
+                    var dpr = win.devicePixelRatio || 1; // 像素设备比
+                    if (!isIos && !(matches && matches[1] > 534) && !isUCHd) {
+                        // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;
+                        dpr = 1;
+                    }
+                    var scale = 1 / dpr;
+                    var metaEl = doc.querySelector('meta[name="viewport"]');
+                    if (!metaEl) { // 如果 viewport忘记写或者不存在
+                        metaEl = doc.createElement("meta");
+                        metaEl.setAttribute("name", "viewport");
+                        doc.head.appendChild(metaEl);
+                    }
+                    var docElement = doc.documentElement;
+                    var clientWidth = docElement.getBoundingClientRect ? docElement.getBoundingClientRect().width : docElement.clientWidth; // 或许屏幕的宽度 750
+
+                    var docFontSize = 50 + "px"; // 默认根元素fontSize
+                    if (clientWidth <= 1200) {  // iPhone6,7,8 可是宽是750 iPhone6P,iPhone7P,iPhone8P 是1242
+                        docFontSize = (clientWidth * dpr) / 7.5 + "px";
+                        if (clientWidth < 375 && !isIos && dpr <= 2) {
+                            docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + "px";
+                        }
+                    }
+                    metaEl.setAttribute("content", "width=device-width,user-scalable=no,initial-scale=" + scale + ",maximum-scale=" + scale + ",minimum-scale=" + scale);
+                    docElement.style.fontSize = docFontSize;
+                };
+                flex();
+        })(window, document);
