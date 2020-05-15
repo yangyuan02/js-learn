@@ -5,3 +5,16 @@
     会对同一个watcher进行过滤，
     
 2.vue context
+
+3.vue父子组件的生命周期
+    1.加载渲染过程
+        同步引入
+            父组件的beforeCreate=>created=>beforeMount=>所有子组件的beforeCreate=>created=>beforeMount=>所有子组件创建=>子组件先挂载=>父组件挂载
+            总结:父组件先创建=>子组件创建=>子组件先挂载=>父组件挂载,不管嵌套几层深，也遵循这个规律
+        异步引入
+            父组件的beforeCreate、created、beforeMount、mounted --> 子组件的beforeCreate、created、beforeMount、mounted
+            总结:父组件创建，父组件挂载；子组件创建，子组件挂载。
+    2.子组件更新过程
+        父beforeUpdate->子beforeUpdate->子updated->父updated
+    3.销毁过程
+        父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
