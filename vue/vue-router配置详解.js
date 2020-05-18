@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-17 11:27:19
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-05-15 13:38:56
+ * @LastEditTime: 2020-05-18 14:24:51
  * @Description:
  */
 import Vue from "vue";
@@ -130,3 +130,7 @@ router.afterEach(to => {
 
 *
 */
+
+// next()
+// next(false) //禁止跳转
+// next(path) // 需要跳转到的路径
