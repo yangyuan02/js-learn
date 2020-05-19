@@ -1,3 +1,15 @@
 1.public/private/protected区别
+    public:共有
+    private:私有  声明的外部不能访问
+        class Greeter {
+        private greeting: string;
+            constructor(message: string) {
+                this.greeting = message;
+            }
+        }
+        new Greeter('abc').greeting; // 错误：'greeting'是私有的。
+    protected:受保护的 不能在声明的外部访问,但子类中可以访问
+    static:静态属性
+
 
 2.keyOf等等一些高级api使用
