@@ -1098,3 +1098,29 @@ promise的构造函数部分是同步的,then函数会放在微任务那里
                 };
                 flex();
         })(window, document);
+
+66.清除浮动的方法
+    1.额外标签法（在最后一个浮动标签后，新加一个标签，给其设置clear：both；）（不推荐）
+    2.父级添加overflow属性（父元素添加overflow:hidden）（不推荐）
+    3.使用after伪元素清除浮动（推荐使用）
+        .clearfix:after{/*伪元素是行内元素 正常浏览器清除浮动方法*/
+            content: "";
+            display: block;
+            height: 0;
+            clear:both;
+            visibility: hidden;
+        }
+        .clearfix{
+            *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+        }
+    4.使用before和after双伪元素清除浮动
+        .clearfix:after,.clearfix:before{
+            content: "";
+            display: table;
+        }
+        .clearfix:after{
+            clear: both;
+        }
+        .clearfix{
+            *zoom: 1;
+        }
