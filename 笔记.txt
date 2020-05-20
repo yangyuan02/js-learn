@@ -237,6 +237,11 @@
                         }
                     }
                 }
+                computed:{
+                    now:function(){
+                        return Date.now()
+                    }
+                }
         watch
             watch和computed很相似,watch用于观察和监听页面上的vue实例,当然大部分我们都会使用computed,数据开变化同时
             进行异步或者开销比较大,选择watch,watch为一个对象,键是需要观察的表达式,值是对应的回调函数,值也可以是方法名,
