@@ -663,6 +663,9 @@
     hasOwnProperty则是判断对象实例是否具有某个属性
         p.hasOwnProperty('age') // true
         p.hasOwnProperty('name') // false
+    for in 和Object.keys()区别
+        for in会遍历原型上面的属性
+        Object.keys()只会遍历本身的属性
 /*************************************************************************************************/
 31.JS垃圾回收机制
     概念:
