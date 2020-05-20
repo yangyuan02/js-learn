@@ -625,3 +625,31 @@
         get在请求时发送一个数据包，会将header和data一起发送过去，而post会产生两个数据包先发送header，服务器返回100，然后在发送data，服务器返回200
 
 /*************************************************************************************************/
+40.async实现原理(async只是generator的语法糖)
+    var x = 1;
+    function *foo(){
+        x++;
+        yield 'hello';
+        x++;
+        console.log(x);
+    }
+    var  it = foo();
+
+    it.next();  //{value：'hello',done:false} 
+    console.log(x);   //2
+    it.next();  //3   {value：undefined,done:true}  //需要手动调用
+
+    function run(g){ // 模拟自动执行器
+        var res = g.next(); //记住res.value是个promise对象
+        if(!res.done){
+            res.value.then(()=>{   //promise解决了才调用next()继续执行生成器内部函数
+            run(g);
+            })  
+        }
+    }
+
+    run(it) // 不需要手动调用
+
+    async function test(){};test();
+    //等价于
+    run((function *test(){})());
