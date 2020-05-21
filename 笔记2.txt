@@ -684,3 +684,65 @@
         将代发布的源文件进行压缩合并，减少文件数量，授权请求最少原则。
     统计代码优化
         针对用户行为统计代码如（CNZZ，百度统计等），进行去除冗余，统一放到首屏后加载
+
+/*************************************************************************************************/
+42.实现一个递归组件
+    创建一个List 的递归组件  // list组件自己调用自己
+        <template>
+            <div>
+                <div class="list-item" v-for="(item, index) in list" :key="index">
+                    <div class="item-name">
+                        <span>{{item.name}}</span>
+                    </div>
+                    <div v-if="item.children" class="children-item">
+                        <list :list="item.children"></list>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <script>
+        export default {
+            name: "List",
+            props: {
+                list: Array
+            }
+        };
+        </script>
+
+        <template>
+    <div class="list-detail">
+      <list :list="list"></list>
+    </div>
+</template>
+<script>
+import List from "./components/List";
+export default {
+  name: "Parent",
+  components: { List },
+  data() {
+    return {
+      list: [{
+          name: "经济",
+          children: [{
+              name: "如家",
+              children: [{
+                  name: "上江路-如家"
+                },
+                {
+                  name: "望江路-如家"
+                }]
+            },{
+              name: "7天",
+              children: [{
+                  name: "长江路-7天"
+                },
+                {
+                  name: "望江路-7天"
+                }]
+            }]
+        }]
+    }
+  }
+}
+</script>
+43.什么是装饰器
