@@ -27,5 +27,10 @@ directives:{
 钩子函数参数
     el:指令绑定的元素
     binding:一个对象
+        {
+            name: //指令名称,不包括v-
+            value: // 指令绑定的值
+            oldValue: // 指令绑定的前一个值
+        }
     vnode:编译生成的虚拟dom节点
     oldVnode上一个虚拟节点
