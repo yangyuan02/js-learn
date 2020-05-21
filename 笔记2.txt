@@ -745,4 +745,45 @@ export default {
   }
 }
 </script>
-43.什么是装饰器
+43.什么是装饰器(https://blog.csdn.net/zl_best/article/details/94447018)
+    1.类装饰器
+        @decorator
+        class A {}
+
+        // 等同于
+        class A {}
+        A = decorator(A) || A;
+
+    @log
+    class MyClass { }
+
+    function log(target) { // 这个 target 在这里就是 MyClass 这个类
+    target.prototype.logger = () => `${target.name} 被调用`
+    }
+
+    const test = new MyClass()
+    test.logger() // MyClass 被调用
+
+    2.属性或方法的装饰
+    class C {
+        @readonly(false)
+        method() { console.log('cat') }
+    }
+
+    function readonly(value) {
+        return function (target, key, descriptor) { 
+            /**
+            * 此处 target 为 C.prototype; 
+            * key 为 method;
+            * 原 descriptor 为：{ value: f, enumarable: false, writable: true, configurable: true }
+            */
+            descriptor.writable = value
+            return descriptor
+        }
+    }
+
+    const c = new C()
+    c.method = () => console.log('dog')
+
+    c.method() // cat
+    
