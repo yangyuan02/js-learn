@@ -2,7 +2,7 @@
  * @Author: yangyuan
  * @Date: 2020-04-23 10:33:47
  * @Email: 1367511704@qq.com
- * @LastEditTime: 2020-04-23 11:37:45
+ * @LastEditTime: 2020-05-21 16:35:00
  * @Description:
  */
 /** 
@@ -123,4 +123,7 @@
  * 改变事件流方式
  *      dom.addEventLister('click',function(){},false)
  *      当第三个参数设置为true就在捕获过程中执行，反之就在冒泡过程中执行处理函数。
+ *
+ *      passive Passive Event Listeners是Chrome提出的一个新的浏览器特性：Web开发者通过一个新的属性passive来告诉浏览器，
+ *      当前页面内注册的事件监听器内部是否会调用preventDefault函数来阻止事件的默认行为。控制丝滑滑动
  */
