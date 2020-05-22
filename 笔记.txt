@@ -163,7 +163,7 @@
             Server:我听到了,你能听到我的吗?
             Client:好的,我们互相都能听到对方的话,我们通信可以开始了
         为什么两次握手不行
-            
+
     四次挥手
     原理
         1.第一次挥手:Client发送一个FIN,用来关闭Client到Server的数据传递,Client进入FIN_WAIT_1状态
@@ -677,6 +677,7 @@
         typeOf '11' === string // true
         Object.prototype.toString.call([]) === '[object Array]' // true
         Object.prototype.toString.call({}) === '[object Object]' // true
+        Object.prototype.toString.call(null) === '[object null]' // true null也是区别不了的 typeof null === 'object'
 /*************************************************************************************************/
 30.in 和hasOwnproperty区别
     function Person() {
