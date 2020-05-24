@@ -843,6 +843,9 @@ export default {
         function isObject(obj) {
             return typeof obj === 'object' && obj !== null
         }
+        缺点
+            层次 比较深,容易造成盏异常
+            无法保证引用是否一直正确
     JSON.stringify()
         var a={
             a:1,
