@@ -152,3 +152,5 @@
             css-loader：打包css文件和处理css文件
             less-loader：加载less文件并且编译成css文件
             style-loader：负责将css-loader加载到的css样式动态的添加到html -> head -> style标签中，style-loader尽量与css-loader结合使用
+
+10.webpack的优化有哪些
