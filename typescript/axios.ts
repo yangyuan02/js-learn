@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-06-03 14:09:25
- * @LastEditTime: 2020-06-03 15:44:40
+ * @LastEditTime: 2020-06-03 16:01:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /shengda-wechart/miniprogram/utils/http/test.ts
@@ -23,9 +23,13 @@ export default class axiosServer {
     private createRequest(baseURL: string, timeout: number): AxiosInstance {
         return axios.create({ baseURL, timeout });
     }
-    public useRequest(fun) {
+    public useRequest(fun: { success: Function; error: Function }) {
         this.useFunList.push(fun);
     }
 }
 
 const test: axiosServer = new axiosServer(6000, "http");
+test.useRequest({
+    success: function (config) {},
+    error: function (error) {},
+});
