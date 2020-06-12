@@ -14,7 +14,7 @@ export default {
     },
     mounted() {
         console.log(this.$store.state.UserStore.name, "state"); // state上面访问  // store.js ===> modules ==> UserStore key访问
-        console.log(this.$store.getters.getUserNmae, "getter"); // getters方法访问 //user.js ===>getUserNmae
+        console.log(this.$store.getters.getUserNmae, "getter"); // getters方法访问 //user.js ===> getters ===> getUserNmae
     },
     method: {
         toVuexMutations() {
