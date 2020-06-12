@@ -39,7 +39,14 @@ export default {
             }); // 对象的方式提交 // user.js ===> mutations.SET_USER 接受参数方式依然不变
         },
         toVuexActions() {
+            // SET_USER ===> user.js ===> actions.setUser
             this.$store.dispatch("setUser", { name: "yangyuan" });
+
+            this.$store.dispatch({
+                // 对象方式提交
+                type: "setUser",
+                name: "yangyuan",
+            });
         },
     },
 };
