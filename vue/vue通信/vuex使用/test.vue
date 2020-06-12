@@ -16,5 +16,10 @@ export default {
         console.log(this.$store.state.UserStore.name, "state"); // state上面访问  // store.js ===> modules ==> UserStore key访问
         console.log(this.$store.getters.getUserNmae, "getter"); // getters方法访问 //user.js ===>getUserNmae
     },
+    method: {
+        toVuexMutations() {
+            this.$store.commit("SET_USER", { name: "yangyuan" }); // SET_USER ===> user.js ===> mutations.SET_USER
+        },
+    },
 };
 </script>
