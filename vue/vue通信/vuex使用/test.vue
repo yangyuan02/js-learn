@@ -20,6 +20,9 @@ export default {
         toVuexMutations() {
             this.$store.commit("SET_USER", { name: "yangyuan" }); // SET_USER ===> user.js ===> mutations.SET_USER
         },
+        toVuexActions() {
+            this.$store.dispatch("setUser", { name: "yangyuan" });
+        },
     },
 };
 </script>

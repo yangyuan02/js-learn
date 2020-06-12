@@ -12,8 +12,15 @@ const mutations = {
     },
 };
 
+const actions = {
+    setUser({ commit }, data) {
+        commit("SET_USER", data);
+    },
+};
+
 export default {
     state,
     getters,
     mutations,
+    actions,
 };
