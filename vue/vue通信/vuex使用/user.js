@@ -17,6 +17,7 @@ const getters = {
 };
 
 const mutations = {
+    // 1必须同步函数 2用mutations改变state一般需要提前在state定义好属性名,不然就得使用使用 Vue.set(obj, 'newProp', 123)或者state.obj = { ...state.obj, newProp: 123 }
     SET_USER(state, plylaod) {
         state.name = plylaod.name;
     },

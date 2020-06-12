@@ -3,7 +3,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
+
+// mapMutations 并没有看明白有什么卵用
 export default {
     data() {
         return {};
@@ -30,6 +32,11 @@ export default {
     method: {
         toVuexMutations() {
             this.$store.commit("SET_USER", { name: "yangyuan" }); // SET_USER ===> user.js ===> mutations.SET_USER
+
+            this.$store.commit({
+                type: "SET_USER",
+                name: "yangyuan",
+            }); // 对象的方式提交 // user.js ===> mutations.SET_USER 接受参数方式依然不变
         },
         toVuexActions() {
             this.$store.dispatch("setUser", { name: "yangyuan" });
