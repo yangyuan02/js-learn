@@ -3,14 +3,20 @@
 </template>
 
 <script>
+import { mapState, mapGetters } from "vuex";
 export default {
     data() {
         return {};
     },
     computed: {
-        name() {
-            return this.$store.state.UserStore.name; // vuex具有响应式所以一般放在computed中
-        },
+        // name() { // 一.直接使用$store进行绑定到computed上
+        //     return this.$store.state.UserStore.name; // vuex具有响应式所以一般放在computed中
+        // },
+        ...mapState({
+            // 二.mapState返回的是对象所以用扩展符号 // UserStore用不用取决于 store.js ==> modules 是否模块化
+            name: (state) => state.UserStore.name,
+            age: (state) => state.UserStore.age,
+        }),
     },
     mounted() {
         console.log(this.$store.state.UserStore.name, "state"); // state上面访问  // store.js ===> modules ==> UserStore key访问
