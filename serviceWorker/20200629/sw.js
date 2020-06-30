@@ -30,19 +30,45 @@ function clearCache() {
         });
     });
 }
+function saveToCache(req, res) {
+    return caches.open(CACHE_NAME).then((cache) => cache.put(req, res));
+}
 
+function fetchAndCache(req) {
+    return fetch(req).then(function (res) {
+        // res是流,必须复制一份
+        saveToCache(req, res.clone());
+        return res;
+    });
+}
+
+// 安装
 this.addEventListener("install", function (event) {
-    // 安装
     event.waitUntil(precache());
 });
-
+// 激活
 this.addEventListener("activated", function (event) {
-    // 激活
     event.waitUntil(clearCache());
 });
 
 this.addEventListener("fetch", function (event) {
     // console.log("request", event.request.url);
+    let url = new URL(event.request);
+    // 不是同源资源的直接返回,原样直接获取资源
+    if (url.origin !== this.origin) {
+        return;
+    }
+    // 有网的情况下,先获取最新资源然后存在本地
+    if (event.request.url.includes("/api/movies")) {
+        event.respondWith(
+            fetchAndCache(event.request).catch(function () {
+                // 如果失败了,去从缓存中获取
+                return cache.match(event.request);
+            })
+        );
+        return;
+    }
+
     event.respondWith(
         fetch(event.request).catch(function () {
             // 网络请求失败
