@@ -69,3 +69,17 @@ el.addEventListener("change", (e) => {
         };
     };
 });
+
+// 下载一个自定义的file
+const btnEl = document.querySelector("button");
+btnEl.addEventListener("click", function () {
+    var json = `{"a":1}`;
+    var file = new File([json], "test.json", {
+        type: "application/json",
+    });
+    const url = window.URL.createObjectURL(file);
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.download = "test.json";
+    aTag.click();
+});
