@@ -1,0 +1,4 @@
+1vue渲染的过程
+    new Vue() ==> init==> $mount() ==> compile() ==> render ==> vnode ==> patch ==> dom
+
+keep-alive的渲染是在patch阶段,这是构建组件树，并将vnode转换成真正的dom节点的过程
