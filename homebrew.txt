@@ -1,0 +1,9 @@
+# 批量安装所有常用软件
+
+brew cask install qq
+
+brew cask install git
+
+brew cask install line
+
+brew cask install iterm2
