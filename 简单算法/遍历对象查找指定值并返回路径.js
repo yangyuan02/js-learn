@@ -17,6 +17,7 @@ function search(object, value) {
     for (var key in object) {
         if (object[key] === value) return [key]; // 找到了
         if (typeof object[key] === "object") {
+            // 没有找到并且是object类型
             // 是对象继续递归
             var temp = search(object[key], value);
             if (temp) return [key, temp].flat();
