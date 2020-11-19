@@ -1,6 +1,6 @@
 // 观察者
 class Observer {
-    public name: string;
+    private name: string;
     public fn: (state: string) => void;
     constructor(name: string, fn: (state: string) => void) {
         this.name = name;
@@ -50,7 +50,10 @@ const laoshi: Observer = new Observer("老师", (state) => {
 
 //创建被观察者
 const xiaoming: Subject = new Subject("学习"); // 初始状态
+
+// 添加观察者
 xiaoming.addObserver(xiaozhang);
 xiaoming.addObserver(laoshi);
 
+// 更改状态,触发观察者动作
 xiaoming.setState("玩游戏");
