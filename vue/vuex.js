@@ -46,7 +46,7 @@
             this.actions[actionName](params);
         };
         commit = (mutaionName, params) => {
-            this.actions[mutaionName](params);
+            this.mutations[mutaionName](params);
         };
     }
     // Vue.use(Vuex)
@@ -90,13 +90,13 @@ let state = {
 
 let actions = {
     updateMsg({ commit }, parmas) {
-        commit("updateMsg", params);
+        commit("updateMsg", parmas);
     },
 };
 
 let mutations = {
     updateMsg(state, params) {
-        state.msg = parmas;
+        state.msg = params;
     },
 };
 
@@ -120,3 +120,7 @@ let vm = new Vue({
     },
     store,
 });
+
+setTimeout(() => {
+    vm.$store.dispath("updateMsg", "111geagea");
+}, 2000);
