@@ -13,3 +13,6 @@ function add() {
     };
     return inner;
 }
+
+var result = add(1)(2)(3);
+result.toString();
