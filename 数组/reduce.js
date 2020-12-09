@@ -39,3 +39,14 @@ function groupBy(objectArray, property) {
 }
 
 groupBy(array, "age"); // {20:[{name:'x', age:'20},{name:'z',age:20}], 21:[{name:'y', age:21}]}
+
+//6功能性函数管道
+const double = (x) => x + x;
+const triple = (x) => 3 * x;
+const quadruple = (x) => 4 * x;
+
+const pipe = (...functions) => (input) =>
+    functions.reduce((acc, fn) => fn(acc), input);
+
+var test = pipe(double, triple);
+test(2); // 12
