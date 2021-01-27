@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box-wrapper {
+            width: 800px;
+            height: 200px;
+        }
+
+        .box {
+            float: left;
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .box1 {
+            background-color: green;
+        }
+
+        .box2 {
+            background-color: orange;
+        }
+
+        .box3 {
+            background-color: red;
+        }
+
+        .box4 {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div class="box-wrapper"> -->
+        <div class="box box1" v-if="boxShow1">box 1</div>
+        <div class="box box2" v-show="boxShow2">box 2</div>
+        <div class="box box3" v-if="boxShow3">box 3</div>
+        <div class="box box4" v-show="boxShow4">box 3</div>
+        <!-- </div> -->
+        <button @click="showBox1">box1</button>
+        <button @click="showBox2">box2</button>
+        <button @click="showBox3">box3</button>
+        <button @click="showBox4">box4</button>
+    </div>
+    <script src="./index.js"></script>
+    <script>
+        new VifShow({
+            el: "#app",
+            data: {
+                boxShow1: false,
+                boxShow2: false,
+                boxShow3: false,
+                boxShow4: false,
+            },
+            method: {
+                showBox1() {
+                    this.boxShow1 = !this.boxShow1
+                },
+                showBox2() {
+                    this.boxShow2 = !this.boxShow2
+                },
+                showBox3() {
+                    this.boxShow3 = !this.boxShow3
+                },
+                showBox4() {
+                    this.boxShow4 = !this.boxShow4
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
