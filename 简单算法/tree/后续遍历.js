@@ -61,6 +61,7 @@ const tree = {
 };
 var postorder = function (root) {
     let result = [];
+    let hasId = false;
     function postOrderTraversal(root) {
         if (!root) {
             return;
@@ -69,6 +70,10 @@ var postorder = function (root) {
             root.children.forEach((child) => {
                 postOrderTraversal(child);
             });
+        if (root.Id) {
+            root.checked = true;
+            hasId = true;
+        }
         result.push(root.Tag);
     }
     postOrderTraversal(root);
