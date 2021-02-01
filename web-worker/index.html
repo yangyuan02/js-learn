@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- https://www.cnblogs.com/gerry2019/p/11456035.html -->
+    <p>Count numbers: <output id="result"></output></p>
+    <button onclick="startWorker()">Start Worker</button>
+    <button onclick="stopWorker()">Stop Worker</button>
+    <input type="text" value="" />
+    <script>
+        let worker
+        function startWorker() {
+            // 创建进程
+            worker = new Worker('./worker.js')
+            worker.onmessage = function (event) {
+                document.getElementById("result").innerHTML = event.data;
+            };
+        }
+
+        function stopWorker() {
+            worker.terminate();
+        }
+
+
+        // // 发送消息给子进程
+        // worker.postMessage('hello world')
+        // // 监听接收消息
+        // worker.onmessage = function (event) {
+        //     console.log('Received message ' + event.data);
+        // }
+    </script>
+</body>
+
+</html>
