@@ -1,0 +1,2 @@
+- content.js 和background之间的区别
+- content.js background,和web应用三者之间通信

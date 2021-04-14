@@ -1,0 +1,7 @@
+- process
+- global 
+- path
+- fs
+- http
+- child_process
+- 标准输入标准输出

@@ -7,6 +7,8 @@
     - 设置了display: grid 属性的被称之为属性
 - 元素
     - 被容器包裹的称为元素
+## 教程
+https://www.bilibili.com/video/BV134411m7dJ?p=6&spm_id_from=pageDriver  暂时看到这里
 
 ## 容器属性
 - display: grid; 将容器变成grid布局
