@@ -14,6 +14,7 @@ https://www.bilibili.com/video/BV134411m7dJ?p=6&spm_id_from=pageDriver  暂时�
 - display: grid; 将容器变成grid布局
 - grid-template-rows 将容器分为多少行
     - grid-template-rows:repeat(3, 1fr) 分为3行，且每个大小一样
+        - repeat(重复次数,重复值, ...重复值)
         - <b>注意:此时就算元素设置了具体的宽度高度，划分的网格大小不变，只是元素宽度高度被设置了为定值(也适用于grid-template-columns)</b>
     - grid-template-rows: 100px 100px 100px 分为3个一样大的元素，且都是100px
 - grid-template-columns 将容器分为多少列
