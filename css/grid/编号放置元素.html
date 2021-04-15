@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        article {
+            width: 300px;
+            height: 300px;
+            border: solid 5px silver;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        div {
+            background-color: blueviolet;
+            background-clip: content-box;
+            border: solid 1px blueviolet;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        div:first-child {
+            /* 根据坐标点画矩形区块也就是合并区块 */
+            /* grid-row-start: 2;
+            grid-column-start: 2;
+            grid-row-end: 3;
+            grid-column-end: 3; */
+
+            /* span 关键字 span 偏移量*/
+            grid-row-start: 2;
+            grid-column-start: 2;
+            grid-row-end: span 1;
+            grid-column-end: span 1;
+        }
+    </style>
+</head>
+
+
+<body>
+    <article>
+        <div>1</div>
+    </article>
+</body>
+
+</html>

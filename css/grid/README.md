@@ -4,6 +4,8 @@
 2. 移动端nav布局.html
 3. repeat.html
 4. row-gap.html
+5. 编号放置元素.html
+6. 小米不规则布局.html
 ## 名词解释
 - 容器
     - 设置了display: grid 属性的被称之为属性
