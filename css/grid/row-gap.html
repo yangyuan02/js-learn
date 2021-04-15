@@ -12,16 +12,12 @@
             height: 300px;
             border: solid 5px silver;
             display: grid;
-            /* grid-template-rows: repeat(auto-fill, 100px); */
-            /* grid-template-columns: repeat(auto-fill, 100px); */
-            /*字段填充具体值*/
-            /* grid-template-rows: repeat(auto-fill, 1fr); */
-            /* grid-template-columns: repeat(auto-fill, 1fr); */
-            /*自动填充*/
-            /* grid-template-rows: 1fr 2fr 1fr; 比例 */
-            /* grid-template-columns: 1fr 2fr 1fr; */
-
-            /* grid-template-rows: repeat(2, minmax(50px, 100px)); // 最小50px,最大100px */
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            /* row-gap: 20px;
+            column-gap: 10px; */
+            /* gap: 20px 10px; // 简写 */
+            /* gap: 10px; / 简写 */
         }
 
         div {

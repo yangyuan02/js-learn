@@ -2,6 +2,8 @@
 ## 学习的顺序
 1. 九宫格布局.html
 2. 移动端nav布局.html
+3. repeat.html
+4. row-gap.html
 ## 名词解释
 - 容器
     - 设置了display: grid 属性的被称之为属性
