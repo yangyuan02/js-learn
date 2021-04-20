@@ -8,6 +8,8 @@
 6. 小米不规则布局.html
 7. 不规则布局.html
 8. 栅格系统模拟.html
+9. grid-area.html
+10. 移动端布局header.html
 
 ## 名词解释
 - 容器
@@ -15,7 +17,7 @@
 - 元素
     - 被容器包裹的称为元素
 ## 教程
-https://www.bilibili.com/video/BV134411m7dJ?p=17  暂时看到这里
+https://www.bilibili.com/video/BV134411m7dJ?p=19 暂时看到这里
 
 ## 容器属性
 - display: grid; 将容器变成grid布局
