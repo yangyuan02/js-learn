@@ -44,7 +44,7 @@ https: const arr = [
     { id: 28, parentId: 24, name: "成都村13" },
 ];
 
-function main(arr, pid = 0) {
+function main (arr, pid = 0) {
     const temp = [];
     for (const item of arr) {
         if (item.parentId === pid) {
@@ -56,3 +56,31 @@ function main(arr, pid = 0) {
 }
 
 const res = main(arr, (pid = 0));
+
+//  根据id分类
+var list = [{
+    uuid: 1,
+    version: 1,
+    id: 1
+}, {
+    uuid: 2,
+    version: 1,
+    id: 1
+},
+{
+    uuid: 3,
+    version: 1,
+    id: 2
+}]
+
+list.reduce((pre, cur, index, arr) => {
+    const { id, uuid } = cur
+    if (id in pre) {
+        const data = pre[id]
+        data.push(uuid)
+        pre[id] = data
+    } else {
+        pre[id] = [uuid]
+    }
+    return pre
+}, {})
