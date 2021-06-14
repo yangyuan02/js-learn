@@ -27,3 +27,25 @@ const getCombine = (arr, n, result = [], current = '') => {
 };
 
 getCombine([1, 2, 3], 2)
+
+
+const getCombine = (arr, n, result = [], current = '') => {
+    // 如果只要取出一个元素，那么只需要将数组元素与已取出的元素一一组合即可
+    if (n === 1) {
+        result.push(...arr.map(v => [current, v].flat()))
+            ;
+        return result;
+    }
+    // 对当前数组进行遍历，剩余元素个数i等于要取出的元素个数时停止遍历
+    for (let i = 0; i < arr.length - n + 1; i++) {
+        // 取出当前的元素与已取出的元素组合
+        const temp = current ? [current, arr[i]] : [arr[i]];
+        console.log()
+        // 递归调用，数组剪切（相当于开始的索引前进），取出的个数减一
+        getCombine(arr.slice(i + 1), n - 1, result, temp.flat());
+    }
+    return result;
+};
+
+getCombine([1, 2, 3], 2)
+
