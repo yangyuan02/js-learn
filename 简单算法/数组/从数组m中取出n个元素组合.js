@@ -47,5 +47,12 @@ const getCombine = (arr, n, result = [], current = '') => {
     return result;
 };
 
-getCombine([1, 2, 3], 2)
+function getTest (data) {
+    const result = [];
+    for (let i = 1; i <= data.length; i++) {
+        result.push(...getCombine(data, i))
+    }
+    return result
+}
 
+getTest([1, 2, 3])
