@@ -12,6 +12,6 @@ while (i <= str.length - 1) {
         max = j - i
         maxStr = str[i]
     }
-    // j会一直++
+    // j会一直++///
     j++;
 }
