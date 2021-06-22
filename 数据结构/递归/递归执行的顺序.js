@@ -82,53 +82,12 @@ var tree = {
         }]
     }]
 }
-const result = [];
-function test (data, aaaa) {
+function test (data) {
     if (!data.children) {
-        return true;
+        return;
     }
-    console.log("a", data)
-    let tmp = {};
-    const temp = test(data.children[0], tmp)
-
-    if (temp) {
-        if (data.checked) {
-            const { children, ...outer } = data;
-            tmp = outer
-        }
-        aaaa.children = [];
-        aaaa.children.push(tmp)
-        console.log("b", data)
-        console.log(aaaa)
-        return true;
-        // const { children, ...outer } = data;
-        // result.push(outer)
-    }
-    console.log(aaaa)
-    return false
+    console.log('a', data)
+    test(data.children[0])
+    console.log('b', data)
 }
 test(tree, {})
-let tree = {}
-while (result.length) {
-    const data = result.shift()
-    tree = data;
-    data.children = [...data]
-}
-
-
-const aa = {
-    name: 'c',
-    checked: true
-}
-
-const b = {
-    name: 'b',
-    checked: true,
-    children: [aa]
-}
-
-const cc = {
-    name: 'cc',
-    checked: true,
-    children: [bb]
-}
