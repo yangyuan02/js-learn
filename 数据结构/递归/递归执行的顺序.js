@@ -82,12 +82,25 @@ var tree = {
         }]
     }]
 }
-function test (data) {
-    if (!data.children) {
-        return;
+
+function filterChecked (tree) {
+    let newTree = {}
+    function deep (data) {
+        if (!data.children) {
+            return;
+        }
+        deep(data.children[0])
+        if (data.checked) {
+            if (!newTree.name) {
+                newTree = data
+            } else {
+                const cloneData = JSON.parse(JSON.stringify(data))
+                cloneData.children = [newTree]
+                newTree = cloneData
+            }
+        }
+        return newTree
     }
-    console.log('a', data)
-    test(data.children[0])
-    console.log('b', data)
+    deep(tree)
+    return newTree
 }
-test(tree, {})

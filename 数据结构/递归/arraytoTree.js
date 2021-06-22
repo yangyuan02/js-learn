@@ -11,12 +11,6 @@ function arrToTree (arr) {
 
 arrToTree(arr)
 
-function deep (tree) {
-    if (!tree.children) {
-        return
-    }
-    deep(tree)
-}
 // reduce实现--reduceRight
 const arr = [{ name: 'a' }, { name: 'b' }, { name: 'c' }]
 arr.reduce((prev, next) => {
