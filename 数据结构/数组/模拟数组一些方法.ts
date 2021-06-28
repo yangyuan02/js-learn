@@ -13,6 +13,8 @@ declare interface Array<T> {
     insterFirstPosition<T>(value:T):number
     removeFisrtPosition<T>():T
 }
+// https://blog.csdn.net/ws9029/article/details/114630423
+// 抽象类和接口的区别
 /**
  * 抽象类
  */
