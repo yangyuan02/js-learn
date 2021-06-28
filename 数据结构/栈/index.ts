@@ -3,12 +3,14 @@
 
 abstract class StackShape<T> {
     public abstract push(element:T)
-    public abstract pop()
-    public abstract peek()
+    public abstract pop():T
+    public abstract peek():T
     public abstract isEmpty():boolean
     public abstract clear()
-    public abstract size()
+    public abstract size():number
+    public abstract toString():string
 }
+// 数组实现
 class Stack <T> extends StackShape<T>{
     private items :T[]
 
@@ -17,34 +19,88 @@ class Stack <T> extends StackShape<T>{
         this.items = []
     }
     /**
-     * @description 添加一个(或几个新元素到栈顶)
-     * @param element 
-     * @returns 
+     * @description 入栈
+     * @param {T} element 要入栈的元素 
      */
-    push<S>(element:S){
+    push(element:T){
         this.items.push(element)
     }
     /**
-     * @description 移除栈顶的元素,同时返回被移除的元素
+     * @description 出栈
+     * @return {T} 返回出栈的元素
      */
-    pop() {}
+    pop():T {
+        return this.items.pop()
+    }
     /**
-     * @description 返回栈顶的元素,不对栈做任何修改(该方法不会移除栈顶元素,仅仅返回它)
+     * @description 返回栈顶的元素
+     * @return {T} 返回出栈的元素
      */
-    peek() {}
+    peek():T {
+        return this.items[this.items.length - 1];
+    }
     /**
-     * @description 如果栈里面没有任何元素就返回true，否则返回false
+     * @description 返回栈是否为空
      * @returns {Boolean}
      */
     isEmpty():boolean {
-        return false
+        return this.items.length === 0;
     }
     /**
-     * @description 移除栈里的所有元素
+     * @description 清空栈
      */
-    clear() {}
+    clear() {
+        this.items = []
+    }
     /**
-     * @description 返回栈里的元素个数,该方法和数组的length属性很类似
+     * @description 返回栈里的元素个数
+     * @return {Number}
      */
-    size() {}
+    size():number {
+        return this.items.length;
+    }
+    toString():string {
+        return this.items.toString();
+    }
 }
+
+// Map 实现，在使用数组时，大部分方法的时间复杂度是 O(n)。找寻某个元素时，在最坏的情况下需要迭代数组的所有位置，所以如果直接使用字典 Map 来存储所有的栈元素能获得更好的性能。
+
+class StackMap<T> {
+    private items : Map<number, T>
+
+    constructor() {
+        this.items = new Map()
+    }
+    push(element:T) {
+        this.items.set(this.items.size, element)
+    }
+    pop(): T {
+        if (this.isEmpty()) {
+          return undefined;
+        }
+        const result = this.items.get(this.items.size - 1);
+        this.items.delete(this.items.size - 1);
+        return result;
+    }
+    isEmpty(): boolean {
+        return this.items.size === 0;
+    }
+    size(): number {
+        return this.items.size;
+    }
+    clear() {
+        this.items.clear();
+    }
+    toString(): string {
+        if (this.isEmpty()) {
+          return '';
+        }
+        let result: string = '';
+        this.items.forEach((value, key) => {
+          result = `${result}${key === 0 ? '' : ', '}${value}`;
+        });
+        return result;
+    }
+}
+
