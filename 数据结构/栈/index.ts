@@ -1,6 +1,6 @@
 // 栈是一种遵循后进先出LIFO原则的有序集合，新添加或待删除的元素都保存在栈的一端
 // 称做栈顶，另一端就叫做栈底，在栈里，新元素都靠近栈顶，旧元素都接近栈底(如一摞书)
-
+// 应用场景撤销历史记录
 abstract class StackShape<T> {
     public abstract push(element:T)
     public abstract pop():T
