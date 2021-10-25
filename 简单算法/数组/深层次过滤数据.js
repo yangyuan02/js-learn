@@ -41,13 +41,26 @@ var material = [
 
 function treeFilter (tree, func) {
     // 使用map复制一下节点，避免修改到原树
-    return tree.map(node => ({ ...node })).filter(node => {
+    // return tree.map(node => ({ ...node })).filter(node => {
+    //     const children = node.children && treeFilter(node.children, func)
+    //     if (children) {
+    //         node.children = children
+    //     }
+    //     return func(node) || (node.children && node.children.length)
+    // })
+    // 减少一次遍历
+    const result = []
+    for (let nodeItem of tree) {
+        const { ...node } = nodeItem;
         const children = node.children && treeFilter(node.children, func)
         if (children) {
             node.children = children
         }
-        return func(node) || (node.children && node.children.length)
-    })
+        if (func(node) || (node.children && node.children.length)) {
+            result.push(node)
+        }
+    }
+    return result
 }
 
 treeFilter(material, (node) => {
