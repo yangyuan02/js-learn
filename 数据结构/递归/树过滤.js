@@ -1,26 +1,4 @@
 
-function filterChecked (tree) {
-    let newTree = {}
-    function deep (data) {
-        if (!data.Children) {
-            newTree = data;
-            return;
-        }
-        deep(data.Children[0])
-        if (data.dChecked) {
-            if (!newTree.Children) {
-                newTree = data
-            } else {
-                const cloneData = JSON.parse(JSON.stringify(data))
-                cloneData.Children = [newTree]
-                newTree = cloneData
-            }
-        }
-    }
-    deep(tree)
-    return newTree
-}
-
 var a = { // 通过
     name: "第一层",
     dChecked: true,
@@ -37,6 +15,27 @@ var a = { // 通过
         }]
     }]
 }
+
+function filterChecked (tree) {
+    let temp = {}
+    function deep (data) {
+        data.Children && deep(data.Children[0])
+        const { Children, ...outer } = data;
+        const { dChecked } = outer;
+        if (dChecked) {
+            if (JSON.stringify(temp) === '{}') {
+                temp = outer
+            } else {
+                outer['Children'] = [temp];
+                temp = outer;
+            }
+        }
+    }
+    deep(tree)
+    return temp
+}
+
+filterChecked(a)
 
 var b = {  // 通过
     name: "第一层",
