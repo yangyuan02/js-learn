@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body{
+            height: 100%;
+        }
+        #app{
+            display: grid;
+            height: 100%;
+            grid-template-areas: 'header header header'
+                                 'aside-left main aside-right'
+                                 'footer footer footer';
+            grid-template-rows: 100px auto 100px;
+            grid-template-columns: 150px auto 150px;
+            text-align: center;
+        }
+        header{
+            grid-area: header;
+            background: red;
+        }
+        .aside-left{
+            grid-area: aside-left;
+            background: rgb(29, 87, 214);
+        }
+        main{
+            grid-area: main;
+            background: rgb(143, 214, 29);
+        }
+        .aside-right{
+            grid-area: aside-right;
+            background: rgb(58, 9, 194);
+        }
+        footer{
+            grid-area: footer;
+            background: rgb(110, 5, 230);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <header>header</header>
+        <aside class="aside-left">aside-left</aside>
+        <main>main</main>
+        <aside class="aside-right">aside-right</aside>
+        <footer>footer</footer>
+    </div>
+</body>
+</html>
