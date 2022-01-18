@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 图片悬浮效果 */
+        /* https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F47d3d4dab03cd71a8800c389d4dd8d5928ab826c37ac3-Vck8iS_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645113528&t=988422a089037655b0cbf5d05c0a7073 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        figure {
+            display: inline-grid;
+            height: 100px;
+        }
+
+        figure>img,
+        figure>figcaption {
+            grid-area: 1 / 1 / 2 / 2;
+        }
+
+        figure>figcaption {
+            align-self: end;
+            text-align: center;
+            background-color: #0009;
+            color: #fff;
+            line-height: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <figure>
+        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F47d3d4dab03cd71a8800c389d4dd8d5928ab826c37ac3-Vck8iS_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645113528&t=988422a089037655b0cbf5d05c0a7073"
+            alt="上海钓鱼自然风景">
+        <figcaption>上海钓鱼自然风景 by zhangxinxu</figcaption>
+    </figure>
+</body>
+
+</html>
