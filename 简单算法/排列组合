@@ -1,0 +1,77 @@
+let a = [4, 2, 3, 4, 8, 7, 8, 9];
+let c = [3, 8, 7, 8, 9];
+let d = [4, 8, 7];
+let step = 10;
+
+
+; 给定一个有序的数值数组N，需要将N分成m份，使得m1,m2,m3...mn每一份值之和等于S，m(n-1)值之和必须小于等于S
+
+; 例如[3,4,1,8]拆分为，每一份和为5，拆分如下
+; [[3,2],[2,1,2],[5],[1]]
+
+/**
+ * @desc 获取满足step条件结果
+ * @param {Array<number>} targetArr 需要切割的目标数组
+ * @param {Number} step 切割的单位长度
+ * @returns
+ */
+function getStep(targetArr, step) {
+  let sum = 0;
+  const canStepChunkArr = []; // 存储每次取出来的数字
+  let index = null;
+  let overflowNum = null;
+  for (let i = 0; i < targetArr.length; i++) {
+    sum += targetArr[i];
+    // 当每次取出来的数字之和超过step停止循环
+    if (sum > step) {
+      index = i;
+      //当前超出的数字
+      overflowNum = targetArr[i];
+      break;
+    }
+    canStepChunkArr.push(targetArr[i]);
+  }
+  // 计算待超出step范围之和
+  const canStepChunkTotal = canStepChunkArr.reduce((a, b) => a + b, 0);
+  // 计算剩余待补充到数组的值
+  const diffToall = step - canStepChunkTotal;
+  // 计算出去补充部分剩余的值
+  const diffOne = overflowNum - diffToall;
+  // 计算补充到数组的最后一位值
+  const diffTwo = overflowNum - diffOne;
+  // 在原数组基础截断剩余待分割数组
+  const surplusArr = targetArr.slice(index + 1);
+  return {
+    index, // 记录当前正好满足的index值
+    result: diffTwo > 0 ? [...canStepChunkArr, diffTwo] : [...canStepChunkArr], // 满足step的条件的数组
+    surplusArr: diffOne > 0 ? [diffOne, ...surplusArr] : [...surplusArr] // 剩余待匹配的数据
+  };
+}
+
+/**
+ * @desc 获取满足分割条件结果
+ * @param {Array<number>} targetArr 需要切割的目标数组
+ * @param {Number} step 切割的单位长度
+ * @returns
+ */
+function getChunks(targetArr, step) {
+  let { index, surplusArr, result } = getStep(targetArr, step);
+  let chunks = [];
+  // 如果index存在,则代表还可以继续分割
+  while (index !== null) {
+    chunks.push(result);
+    // 判断边界情况,如果全部分割完成,还有剩余一点点，则跳出循环
+    let isDeep = surplusArr.reduce((a, b) => a + b, 0);
+    if (isDeep < step) {
+      chunks.push(surplusArr);
+      break;
+    }
+    //while循环改变条件值
+    let { index: cc, surplusArr: aa, result: ss } = getStep(surplusArr, step);
+    index = cc;
+    surplusArr = aa;
+    result = ss;
+  }
+  return chunks;
+}
+getChunks(d, step);
